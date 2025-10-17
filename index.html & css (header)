@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather website</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <style>
+        /* General Reset and Fonts */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    background-color: #f4f4f4;
+}
+
+/* ---------------------------------- */
+/* 1. Weather website Header Structure (The main container) */
+/* ---------------------------------- */
+.saws-header {
+    width: 100%;
+    /* No background here, as the elements below provide the color */
+}
+
+/* ---------------------------------- */
+/* 2. Top Banner (Logo Area) */
+/* ---------------------------------- */
+.top-banner {
+    background-color: white;
+    padding: 10px 20px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-group {
+    width: 90%; /* Constrain content width */
+    max-width: 1200px; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo img {
+    width: 150px; 
+    height: auto; 
+    object-fit: contain;
+}
+
+/* ---------------------------------- */
+/* 3. Main Navigation Bar */
+/* ---------------------------------- */
+.main-nav {
+    background-color:#0000A0; /* Blue as seen in the image */
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.nav-container {
+    width: 90%; /* Constrain content width */
+    max-width: 1200px;
+    margin: 0 auto; /* Center the navigation links */
+    display: flex;
+    justify-content: space-around; /* Distribute links evenly */
+    flex-wrap: wrap;
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    font-size: 0.9em;
+    font-weight: 500;
+    padding: 5px 10px;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 3px;
+    white-space: nowrap; /* Prevent links from breaking */
+}
+
+.nav-link:hover {
+    background-color: #0000A0; /* Blue on hover */
+    color: #008000; /* black color */
+    font-size: large;
+}
+
+    </style>
+    <header class="weather-header">
+        
+        <div class="top-banner">
+            <div class="logo-group">
+               <div class="logo saws-logo">
+                   <img src="https://www.weathersa.co.za/images/SAWS%20logoFINAL.png">
+                    
+                </div>
+                <div class="logo gov-logo">
+                    <img src="https://www.weathersa.co.za/images/DEFF_LOGO.jpg">
+                    
+                </div>
+            </div>
+        </div>
+      <div class="col-md-12 text-center" style="display:block; height: auto; padding: 10px 0px; margin: 0px 0px 10px 0px; background-color:darkgoldenrod; color: #000; font-weight: bolder">
+    <marquee direction="left">
+        <a href="https://www.dffe.gov.za/g20ecswg" target="_blank" style="text-decoration: none;">
+
+            <strong style="padding-right:750px;color:black">Monitoring Weather, Safeguarding Our Air: Championing Climate Action at the G20 Summit Learn How We’re Making a Difference   <l style="color:black; background-color:greenyellow"> Click Here </l> </strong>
+           
+        </a>
+    </marquee>
+</div>
+        <nav class="main-nav">
+            
+            <div class="nav-container">
+                <a href="#" class="nav-link">About</a>
+                <a href="#" class="nav-link">Weather</a>
+                <a href="#" class="nav-link">Forecast</a>
+                <a href="#" class="nav-link">Observations</a>
+                <a href="#" class="nav-link">Climate</a>
+                <a href="#" class="nav-link">Media</a>
+                <a href="#" class="nav-link">Product & Services</a>
+                <a href="#" class="nav-link">Careers</a>
+                <a href="#" class="nav-link">FAQs</a>
+                <a href="#" class="nav-link">Contact</a>
+            </div>
+        </nav>
+            
+    </header>
+
+   
+</body>
+</html>
