@@ -1,0 +1,2764 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=11.0" />
+    <title>SAWS Home - WeatherSA Portal</title>
+
+
+
+
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.css' rel='stylesheet' />
+
+    <link rel="stylesheet" href="/css/carouseller.css">
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src="/js/carouseller.js"></script>
+    <script src="/js/jquery.easing.1.3.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="/lib/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="/css/site.css" />
+    <link rel="stylesheet" href="/css/weather.css" />
+    <link rel="stylesheet" href="/lib/weather-icons-master/css/weather-icons.css" />
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300&amp;subset=latin" media="all" />
+    <link href="https://fonts.googleapis.com/css?family=Anton|Archivo+Black|Open+Sans:600" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/images/Fav/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/images/Fav/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/images/Fav/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/images/Fav/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/images/Fav/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/images/Fav/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/images/Fav/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/images/Fav/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/Fav/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/images/Fav/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/Fav/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/images/Fav/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/Fav/favicon-16x16.png">
+    <link rel="manifest" href="/images/Fav/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="~/images/Fav/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <script async='async' src='https://www.googletagservices.com/tag/js/gpt.js'></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+
+    <script>
+        googletag.cmd.push(function() {
+            //var mappingadunitname0 = googletag.sizeMapping().
+            //    addSize([1024, 0], [[300, 250], [300, 600]]).
+            //    addSize([768, 0], [[300, 250], [300, 600]]).
+            //    addSize([320, 0], [[300, 250]]).
+            //    addSize([0, 0], [[300, 250]]).
+            //    build();
+            var mappingadunitname1 = googletag.sizeMapping().
+            addSize([1024, 0], [728, 90] /*, [970, 250], [728, 90], [970, 90]*/ ).
+            addSize([768, 0], [728, 90] /*, [728, 90], [336, 280]*/ ).
+            addSize([320, 0], [320, 100]).
+            addSize([0, 0], [320, 50]).
+            build();
+            //googletag.defineSlot('/72803759/WSA_Homepage_300x250_Middle_RHS', [[300, 250]/*, [300, 600]*/], 'div-gpt-ad-1518613907040-0').defineSizeMapping(mappingadunitname0).addService(googletag.pubads());
+            googletag.defineSlot('/72803759/WSA_Homepage_728x90_Top', [728, 90], 'div-gpt-ad-1518613981347-0').defineSizeMapping(mappingadunitname1).addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.pubads().collapseEmptyDivs();
+            googletag.enableServices();
+        });
+    </script>
+
+    <style>
+        .dropdown-submenu {
+            position: relative;
+        }
+
+        .dropdown-submenu a::after {
+            transform: rotate(-90deg);
+            position: absolute;
+            right: 6px;
+            top: .8em;
+        }
+
+        .dropdown-submenu .dropdown-menu {
+            top: 0;
+            left: 100%;
+            margin-left: .1rem;
+            margin-right: .1rem;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <script>
+        document.body.className += ' fade-out';
+    </script>
+
+    <div class="loader bgOnload">
+        <img src="/images/SAWS logoFINAL.png" />
+        <h6> South African Weather Service. Please Wait... </h6>
+    </div>
+
+    <div class="container-fluid comLogoSection">
+        <div class="container compLogo">
+
+            <div class="row">
+                <div class="col-md-2 sawslogo">
+                    <a href="/"> <img src="/images/SAWS logoFINAL.png" width="80%" /></a>
+                </div>
+
+
+                <div class="col-md-7">
+                    <!-- /72803759/WSA_Homepage_300x250_Middle_RHS -->
+                    <div id='div-gpt-ad-1518613981347-0'>
+                        <!-- /72803759/WSA_Homepage_728x90_Top -->
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
+
+
+
+
+                <div class="col-md-2 dealogo">
+                    <a href="https://www.environment.gov.za/" target="_blank"><img src="/images/DEFF_LOGO.jpg" class="img-responsive" width="100%" /></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-default" data-spy="affix" data-offset-top="110">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="visible-xs col-xs-6">
+                    <h5 style="padding: 5px; color: #f5f5f5; font-weight: bolder;">South African Weather Service</h5>
+                </div>
+            </div>
+
+
+
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> About <!--<span class="caret"></span>--></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/home/about">About Us</a></li>
+                            <li><a href="/home/overview">Organisation Overview</a></li>
+                            <li><a href="/home/board">Board Members</a></li>
+                            <li><a href="/leadership/leadership">Executive and Senior Management</a></li>
+                            <li><a href="http://rtc.weathersa.co.za/" target="_blank">Regional Training Center</a></li>
+                            <li><a href="/home/legislation">Applicable Legislation</a></li>
+                            <li><a href="/home/annualreports">Annual Reports</a></li>
+                            <li><a href="/home/tenderdocuments">Tender Documents</a></li>
+                            <li><a href="/home/rfqportal">RFQ Documents</a></li>
+                            <li><a href="/home/popia">POPIA</a></li>
+                            <li><a href="/home/paia">PAIA</a></li>
+                            <li><a href="/home/strategicandannualperformanceplans">Strategic And Annual Performance Plans</a></li>
+                        </ul>
+                    </li>
+
+                    <li><a href="/"> Weather </a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Forecast </a>
+                        <ul class="dropdown-menu">
+
+                            <li><a href="/home/weathermaps">Weather Forecast</a></li>
+                            <li><a href="http://marine.weathersa.co.za/Forecasts_Home.html" target="_blank">Marine Forecast</a></li>
+                            <li><a href="/home/longrangeforecast">Long Range Forecast</a></li>
+                            <li><a href="/home/seasonalclimate">Seasonal Forecast</a></li>
+                            <li><a href="/images/data/specialised/rsa_trav.pdf" target="_blank">Travellers Forecast</a></li>
+                            <li><a href="/images/data/specialised/rsa_summ.pdf" target="_blank">Regional Forecast</a></li>
+                            <li><a href="/home/fireindex">Fire Danger Indicator</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Observations <!--<span class="caret"></span>--></a>
+                        <ul class="dropdown-menu">
+                            <!--<li><a asp-area="" asp-controller="Home" asp-action="Regions">Regions</a></li>-->
+                            <li><a href="/home/satelliteimg">Satellite Images</a></li>
+                            <li><a href="/home/synopticcharts">Synoptic Charts</a></li>
+                            <li><a href="http://marine.weathersa.co.za/Observations_Home.html" target="_blank">Marine Observations</a></li>
+                            <li><a href="/home/radarst">Storm Tracker</a></li>
+
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Climate <!--<span class="caret"></span>--></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/home/aboutclimateatsaws">About Climate at SAWS</a></li>
+                            <li><a href="/home/historicalrain">Historical Rain Maps</a></li>
+                            <li><a href="/home/recentclimate">Recent Climate</a></li>
+                            <li><a href="/home/historicalsynoptic">Historical Synoptic Charts</a></li>
+                            <li><a href="/home/climatechangeatlas">Climate Change Atlas</a></li>
+                            <li><a href="/home/annualstateoftheclimate">Annual State Of The Climate</a></li>
+                            <li><a href="/home/extremeclimateindices">Extreme Climate Indices</a></li>
+                            <li><a href="/home/regionalweatherclimate">Regional Weather and Climate of SA</a></li>
+                            <li><a href="/Documents/Climate/nr_drought.pdf">Drought Monitoring Desk</a></li>
+                            <li><a href="https://forms.office.com/r/wPH3QeU37w" target="_blank">Climate Information Customer Survey </a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" style="background-color:orange;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Media <sup>New</sup> <!--<span class="caret"></span>--></a>
+                        <ul class="dropdown-menu">
+                            <li style="background-color:orange;"><a style="background-color:orange;font-weight:bold;color:white !important;" href="/home/mediareleases">Media Releases</a></li>
+                            <li><a href="#">Media Interviews</a></li>
+                            <li><a href="/home/mediaarticles">Media Articles</a></li>
+
+                            <li><a href="/home/weathersmartnewsletters">WeatherSmart Newsletter</a></li>
+
+                            <li><a href="/home/internationale">The Internationale</a></li>
+
+
+                        </ul>
+                    </li>
+
+                    <!--<li><a asp-area="" asp-controller="Home" asp-action="Api"><i class="fa fa-podcast"></i>API </a></li>-->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Product & Services <!--<span class="caret"></span>--></a>
+
+                        <ul class="dropdown-menu">
+                            <li><a href="/home/subscribe"> SAWS Services </a></li>
+                            <li><a href="http://marine.weathersa.co.za/Products_Services_Home.html" target="_blank">Metocean Services</a></li>
+                            <li class="dropdown-submenu">
+                                <a href="#" class="dropdown-item dropdown-toggle"> Industry Services <!--<span class="caret"></span>--></a>
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown-item"><a href="/home/agricultureindustry"> Agriculture</a></li>
+                                    <li class="dropdown-item"><a href="/home/constructionindustry"> Construction</a></li>
+                                    <li class="dropdown-item"><a href="/home/energyindustry"> Energy</a></li>
+                                    <li class="dropdown-item"><a href="/home/financialservicesindustry"> Financial Services</a></li>
+                                    <li class="dropdown-item"><a href="/home/healthindustry"> Health</a></li>
+                                    <li class="dropdown-item"><a href="/home/insuranceindustry"> Insurance</a></li>
+                                    <li class="dropdown-item"><a href="/home/miningindustry"> Mining</a></li>
+                                    <li class="dropdown-item"><a href="/home/retailindustry"> Retail</a></li>
+                                    <li class="dropdown-item"><a href="/home/sportseventsindustry"> Sports & Events</a></li>
+                                    <li class="dropdown-item"><a href="/home/transportlogisticsindustry"> Transport & Logistics</a></li>
+                                    <li class="dropdown-item"><a href="/home/waterindustry"> Water</a></li>
+                                    <li class="dropdown-item"><a href="/ProductCatalogue.html" target="_blank">Product Catalogue</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="/home/lightningintegrate">  Lightning Services </a></li>
+
+                        </ul>
+                    </li>
+
+
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Careers <!--<span class="caret"></span>--></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="https://recruitment.weathersa.co.za/" target="_blank">Vacancies</a></li>
+                            <li><a href="/home/bursaries">Bursaries</a></li>
+                        </ul>
+                    </li>
+
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">FAQs <!--<span class="caret"></span>--></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/home/climateques">Climate Questions</a></li>
+                            <li><a href="/home/educques">Educational Questions</a></li>
+                            <li><a href="/home/weatherques">Weather Questions</a></li>
+                            <li><a href="/home/forecastques">Impact-based info</a></li>
+                            <li><a href="/home/weatherbrochures">Weather Awareness Brochures</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><!--<i class="fa fa-phone"></i>-->Contact <!--<span class="caret"></span>--></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/home/equiries_climatedata">Climate Data Request</a></li>
+                            <li><a href="/home/contact">Contact Details</a></li>
+                            <li><a href="/home/equiries_complains">Complaints and Compliments</a></li>
+                            <li><a href="/home/partners_clients">Partners and Clients</a></li>
+                            <li><a href="/home/equiries">General Enquiries</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown hidden" id="sessionID">
+                        <a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><!--<i class="fa fa-phone"></i>-->My Subscriptions <!--<span class="caret"></span>--></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/home/dashboard">Dashboard</a></li>
+                        </ul>
+                    </li>
+
+
+                </ul>
+
+            </div>
+        </div>
+        <div class="floatingElem">
+            <div class="col-md-3 hotlineMain">
+                <div class="col-md-10 hotlineDetails" style="height:360px;">
+
+                    <h4> ETHICS AND FRAUD </h4>
+                    <ul class="list-unstyled">
+                        <li> The South African Weather Services is committed</li>
+                        <li> to integrity, ethical values and governance. We</li>
+                        <li> encourage our employees, clients, and stakeholders</li>
+                        <li> to report corrupt and unethical behaviour. </li>
+                    </ul>
+
+                    <h4> Fraud Reporting Details </h4>
+                    <ul class="list-unstyled">
+
+                        <li> <a href="tel: +27 801 122 389">Toll Free Number: 0801 122 389</a></li>
+                        <li> Email: <a href="mailto:hotline@kpmg.co.za" target="_top">hotline@kpmg.co.za</a></li>
+                        <li> <a href="tel: +27 800 200 796"> Toll free fax:0800 200 796 </a></li>
+                        <li> Postal: BNT 371, P O Box 14671, Sinoville, 0129</li>
+                        <li> Webmail: <a href="http://www.thornhill.co.za/kpmgfaircallreport" target="_top">www.thornhill.co.za/kpmgfaircallreport</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 hotlineText">
+                    <img src="/images/Fraud Hotline.png" />
+                </div>
+
+            </div>
+        </div>
+    </nav>
+
+    <!-- <div class="col-md-3 hotlineMain">
+         <div class="col-md-10 hotlineDetails">
+             <h4> Fraud Reporting Details </h4>
+             <ul class="list-unstyled">
+                 <li> <a href="tel: +27 800 111 527">Toll Free Number: 0800 111 527</a></li>
+                 <li> Email: <a href="mailto:saweather@whistleblowing.co.za">saweather@whistleblowing.co.za</a></li>
+                 <li> <a href="tel: +27 800 212 689"> Toll free fax:0800 212 689 </a></li>
+                 <li> Postal: FREEPOST KZN665, MUSGRAVE, 4062</li>
+                 <li> SMS Short Code: <a href="sms://33490?body=Fraud%20Report.%20Type%20your%20message%20here.">33490</a></li>
+             </ul>
+         </div>
+
+         <div class="col-md-2 hotlineText">
+             <img src="~/images/Fraud Hotline.png" />
+         </div>
+     </div>
+
+     <div class="col-md-12 WarningMain">
+         <div class="col-md-10 WarningDetails">
+             
+
+
+
+
+         </div>
+
+         <div class="col-md-2 WarningText">
+             <img src="~/images/Warning.png" />  The Default Email
+    </div>
+    </div>-->
+
+
+    <script src="/lib/leaflet/dist/leaflet.js"></script>
+    <script src="/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="/js/WeatherImage.js"></script>
+
+    <!--<div class="col-md-12 text-center" style="display:block; height: auto; padding: 10px 0px; margin: 0px 0px 10px 0px; background-color:darkgoldenrod; color: #000; font-weight: bolder">
+    <marquee direction="left">
+        <a asp-area="" asp-controller="Home" asp-action="Livestockheatstress" target="" style="text-decoration: none;">
+
+            <strong style="padding-right:750px;color:black">Get Back What The Rain Took Away - A Verifiable Report For Just As Little As R713.00   <l style="color:black; background-color:greenyellow"> Click Here </l> </strong>
+            <strong style="padding-right:750px;color:black">Get Back What The Rain Took Away - A Verifiable Report For Just As Little As R713.00  <l style="color: black; background-color: greenyellow"> Click Here </l>  </strong>
+            <strong style="padding-right:0px;color:black">Get Back What The Rain Took Away - A Verifiable Report For Just As Little As R713.00  <l style="color: black; background-color: greenyellow"> Click Here </l>  </strong>
+
+        </a>
+    </marquee>
+</div>-->
+
+    <div class="col-md-12 text-center" style="display:block; height: auto; padding: 10px 0px; margin: 0px 0px 10px 0px; background-color:darkgoldenrod; color: #000; font-weight: bolder">
+        <marquee direction="left">
+            <a href="https://www.dffe.gov.za/g20ecswg" target="_blank" style="text-decoration: none;">
+
+            <strong style="padding-right:750px;color:black">Monitoring Weather, Safeguarding Our Air: Championing Climate Action at the G20 Summit Learn How We’re Making a Difference   <l style="color:black; background-color:greenyellow"> Click Here </l> </strong>
+           
+        </a>
+        </marquee>
+    </div>
+
+    <!-- Modal content-->
+    <!---->
+    <div class="col-md-12 text-center" style="display:block; height: auto; padding: 10px 0px; margin: 0px 0px 10px 0px; background-color:#f5f5f5; color: #000; font-weight: bolder" id="popup"> Note: This website uses cookies to recognise you and remember your preferences or settings when you return to our SAWS website &nbsp; <button class="btn btn-info" id="confirmCookie"> Ok </button> </div>
+    <!-- Modal content-->
+    <!---->
+    <!-- Modal content-->
+    <!---->
+    <!-- Modal content-->
+    <!---->
+
+    <div class="container-fluid contentHeader">
+
+        <div id="mapholder"></div>
+        <div class="floatingElem2">
+            <div class="col-md-3 warningAlertMain">
+                <div class="col-md-2 warningAlertText">
+                    <a href="/home/warnings"><img src="/images/Warning.png" style="background: #ff0000;" /></a>
+
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <form class="search-form cmxform" id="form1" role="search" action="/" method="post">
+                        <div class="box">
+                            <div class="container-1">
+                                <fieldset>
+                                    <input type="text" id="search" class="customPlaceholder" required minlength="3" placeholder="Enter a town or city near you..." name="city" autocomplete="off" />
+                                    <button class="icon" id="submitsearch" type="submit"><i class="fa fa-search fa-2x"></i></button>
+                                    <div class="error">
+                                    </div>
+
+
+                                    <div class="searchFunc" style="height: 285px; background: #fff; overflow-x: hidden;">
+                                        <table class="table table-hover">
+
+                                            <tbody id="myTable">
+                                                <tr>
+                                                    <td>St Faith's (Cathula)</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Harding</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>New Hanover</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Dumisa</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Impendle</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Camperdown</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Richmond</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Ekuvukeni</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Sobabili</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Goodhome</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Dundee</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>eNdumeni</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Nqutu</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Nquthu</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Pomeroy</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Utrecht</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Dannhauser</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Paulpietersburg</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Nongoma</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Garies</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Hluhluwe</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Hlabisa</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Kwa Mbonambi</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Melmoth</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Nkandla</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>KwaDukusa</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Stanger</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Ndwedwe</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Maphumulo</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Underberg</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Umzimkhulu</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Durban (Greyville)</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Hillcrest</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Mount Edgecombe</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Amanzimtoti</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Port Shepstone</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Margate</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Cape Vidal</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Jansenville</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Peddie</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Adelaide</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Tarkastad</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Molteno</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Lady Frere</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Cofimvaba</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Komga</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Butterworth</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Dutywa</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Libode</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Lusikisiki</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Bizana</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Ntabankulu</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Tsolo</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Mount ayliff</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Maclear</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Burgersdorp</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Plettenberg Bay</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Tsitsikama</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Cape St Francis</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Cape Recife</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Cape Padrone</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Port Alfred</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Ngqushwa</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Buffalo City</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Kei River</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Wavecrest</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>The Haven</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Coffee Bay</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Port St Johns</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Mkambati</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Wild Coast Sun</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Ceres</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Swellendam</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Prince Albert</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Port Nolloth</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Kleinzee</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Hondeklip Bay</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Strandfontein</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Lamberts Bay</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Cape Columbine</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Langebaan</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Dassen Island</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Table Bay</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Cape Point</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Hermanus</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Cape Agulhas 1</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Cape Agulhas 2</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Still Bay</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Mossel Bay</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>George</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Knysna</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Marble Hall</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Jane Furse</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Makhuduthamaga</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Tubatse</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>burgersfort</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Fetakgomo</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Apel</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Mooketsi</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Tshilamba</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Musina</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Alldays</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Dendron</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Moletji</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Mogoto</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Mookgopong</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Vaalwater</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Mkhondo</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Piet Retief</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Amersfoort</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Balfour</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Standerton</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Delmas</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Witbank</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Emalahleni</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Middelburg</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Tweefontein</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Nokaneng</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Barberton</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Sabie</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Blyde River Canyon</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Komatiepoort</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Nkomazi</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Bushbuckridge</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Tembisa</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Meyerton</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Heidelberg</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Lesedi</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Krugersdorp</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Mogale City</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Randfontein</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Westonaria</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Merafong</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Carletonville</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Sandton</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Soweto</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Pelindaba</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Hammanskraal</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Nokeng tsa Taemane</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Cullinan</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Makapanstad</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Koster</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Koffiefontein</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Thaba Nchu</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Krugerdrift Dam</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Tierpoort Dam</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Tokologo</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Dealesville</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Brandfort</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Tikwana</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Hoopstad</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Ladybrand</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Reitz</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Metsimaholo</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Sasolburg</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Ngwathe/Parys</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Victoria West</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Petrusville</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Hopetown</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Griquastad</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Groblershoop</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Daniëlskuil</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Barkly West</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Warrenton</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Jan Kempdorp</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Hotazel</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Ratlou</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Zeerust</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Schweizer-Reneke</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Saldanha Bay</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Lephalale</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Polokwane</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Makhado</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Thohoyandou</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Mashishing</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Giyani</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Tzaneen</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Ba-Phalaborwa</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Tosca</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Mafikeng</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Mahikeng</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Thabazimbi</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Rustenburg</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Pilanesberg</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Hartebeespoort</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Lanseria</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Mamelodi</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Pretoria</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Tshwane</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Midrand</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Pretoria North</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Ermelo</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Towoomba</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Centurion</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Mokopane</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Groblersdal</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Kungwini</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Bronkhorstspruit</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Machadodorp</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Graskop</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Whiteriver</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Mbombela</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Hoedspruit</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Skukuza</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Twee Rivieren</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Kathu</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Kuruman</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Taung</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Vryburg</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Lichtenburg</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Ottosdal</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Bloemhof</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Wolmaranstad</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Matjhabeng</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Klerksdorp</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Khotsong</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Bothaville</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Ventersdorp</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Tlokwe</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Potch</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Potchefstroom</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Vereeniging</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Moqhaka</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Kroonstad</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Johannesburg</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Frankfort</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Mafube</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Kempton park</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Kwa Thema</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Springs</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Secunda</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Warden</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Newcastle</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Carolina</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Badplaas</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Nhlazatshe</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Vryheid</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Abaqulusi</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Mbazwana</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Makatini</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Richards Bay </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Alexanderbaai</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Pofadder</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Upington</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Augrabies Falls</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Postmasburg</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Kimberley</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Bloemfontein Airport</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Bloemfontein City</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Ficksburg</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Bohlokong</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Van Reenen</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Royal National Park</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Escourt</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Ladysmith</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Champagne Castle</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Emnambithi</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Drakensberg Garden</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>uPhongolo</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Mooi River</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Greytown</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Riverview</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Ulundi</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Mandini</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Eshowe</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Ntambanana </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Springbok</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>VanWyksvlei</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Prieska</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>De Aar</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Fauresmith</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Aliwal North</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Wepener</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Barkly East</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Matatiele</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Donnybrook</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Ixopo</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Kokstad</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Paddock</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Pennington</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Howick</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Pietermaritzburg</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Giants Castle</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>King Shaka Airport</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Vredendal</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Calvinia</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Noupoort</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Queenstown</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Komani</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Jamestown</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Elliot</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Ncobo</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Mthatha</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Port St Johns</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Redelingshuys</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Clanwilliam</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Paarl</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Malmesbury</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Robertson</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Sutherland</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Laingsburg</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Beaufort West</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Graaff - Reinet</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Cradock</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Fort Beaufort</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Bhisho</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Stutterheim</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Atlantis</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Kirstenbosch</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Robben Island</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Cape Town city</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Worcester</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Stellenbosch</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Ladismith</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Oudtshoorn</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>George</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Willowmore</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Joubertina</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Patensie</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Coega</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Uitenhage</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Somerset East</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Addo</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Port Elizabeth</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Nelson Mandela Bay</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Port Alfred</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Grahamstown</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>East London</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Strand</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Kommetjie</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Cape Point</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Hermanus</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Cape Agulhas</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Grabouw</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Riversdale</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Mosselbay</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Plettenberg Bay</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Knysna</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Cape Flats</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Bethlehem</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Harrismith</td>
+                                                </tr>
+
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                        <input name="__RequestVerificationToken" type="hidden" value="CfDJ8MYQNqDTJnNNnsoHOr1U7-VdOuX1ACr-IIrV-hqKSDKRnBtiCIu0SR3pbEpTf6lnHIhDMpb_VvGaMLhtzRZhsnCDOgUisu64Ml5VcPr_brV1dLFY8nuaSex0f1Wt9pJEa_Mie5RxYsteAUHMC8q9Dgk" /></form>
+
+
+                    <div class="alert alert-danger" id="errAlert"><strong></strong></div>
+
+                    <div class="weather">
+                        <div class="current">
+                            <div class="info">
+                                <div>&nbsp;</div>
+                                <a class="corf" hidden></a>
+                                <div class="city">
+                                    <!--<small>CITY:</small> -->Johannesburg</div>
+                                <br />
+                                <form class="search-form cmxform" id="form1" role="hiddencity" action="/home/setcookie" method="post">
+                                    <input type="text" class="hidden" id="hiddensearch" minlength="3" name="hiddencity" autocomplete="off" value="Johannesburg" />
+                                    <button class="btn btn-info" id="addcookie" type="submit"><i class=""></i>Set as Favorite City</button>
+                                    <input name="__RequestVerificationToken" type="hidden" value="CfDJ8MYQNqDTJnNNnsoHOr1U7-VdOuX1ACr-IIrV-hqKSDKRnBtiCIu0SR3pbEpTf6lnHIhDMpb_VvGaMLhtzRZhsnCDOgUisu64Ml5VcPr_brV1dLFY8nuaSex0f1Wt9pJEa_Mie5RxYsteAUHMC8q9Dgk" /></form>
+                                <div class="currentday"><small>Current</small></div>
+                                <div class="temp"><span class="celsi">20</span> <span class="fahr" hidden>68</span> <sup class="celsius">&deg;C </sup><sup>|</sup><sup class="fahrenheit"> &deg;F</sup></div>
+                                <div class="describ" style="text-transform: capitalize;"><small>Showers and Thundershowers</small></div>
+                            </div>
+
+                        </div>
+                        <div class="future">
+                            <div class="day day-0">
+                                <h4 class="cday-0">Today</h4>
+                                <p class="cp-0" id="cp"><span class="ic-0 wi ../images/animated/newicons/Storm.gif"><img src="../images/animated/newicons/Storm.gif" /></span></p>
+
+                                <!--<small>Min 5&deg;C</small><br /><small>Max 12&deg;C</small>-->
+
+                                <p class="ctemp-0"><span class="celsi" style="color:red;">27&deg;</span>&nbsp;<span class="celsi" style="font-size: 15px; color:#6D6D6D;">10&deg;</span> <span class="fahr" style="color:red;" hidden>81 &deg; </span> <span class="fahr" style="font-size: 15px; color:#6D6D6D;"
+                                        hidden>50 &deg;</span></p>
+
+                                <p hidden class="ctempmax-0">20 </p>
+                                <p hidden class="ctempmaxfahr-0">68 </p>
+                                <p hidden class="ctempmaxfahrMin-0"> </p>
+                                <a hidden class="icon-0">Showers and Thundershowers</a>
+                                <a hidden class="description-0">Showers and Thundershowers</a>
+                                <a hidden class="humidity-0">40</a>
+                                <a hidden class="min-0">10</a>
+                                <a hidden class="max-0">27</a>
+                                <a hidden class="minF-0">50</a>
+                                <a hidden class="maxF-0">81</a>
+                                <a hidden class="cloudi-0">Showers and Thundershowers</a>
+                                <a hidden class="windDirec-0">NNW</a>
+                                <a hidden class="windSpeed-0"></a>
+                                <a hidden class="windSpeedknots-0">5.0</a>
+                                <a hidden class="precipitationPropability-0">30</a>
+                                <a hidden class="precipitationAmount-0">3</a>
+                                <a hidden class="windGust-0">n/a</a>
+                                <a hidden class="visibility-0">Very Poor</a>
+                                <a hidden class="sunrise-0">05:37</a>
+                                <a hidden class="sunset-0">18:12</a>
+                                <a hidden class="WDS-0">N</a>
+
+                            </div>
+                            <div class="day day-1">
+                                <h4 class="cday-1">Saturday</h4>
+                                <p class="cp-1" id="cp"><span class="ic-1 wi ../images/animated/newicons/Storm.gif"><img src="../images/animated/newicons/Storm.gif" /></span></p>
+
+                                <!--<small>Min 5&deg;C</small><br /><small>Max 12&deg;C</small>-->
+
+                                <p class="ctemp-1"><span class="celsi" style="color:red;">28&deg;</span>&nbsp;<span class="celsi" style="font-size: 15px; color:#6D6D6D;">11&deg;</span> <span class="fahr" style="color:red;" hidden>82 &deg; </span> <span class="fahr" style="font-size: 15px; color:#6D6D6D;"
+                                        hidden>52 &deg;</span></p>
+
+                                <p hidden class="ctempmax-1">20 </p>
+                                <p hidden class="ctempmaxfahr-1">68 </p>
+                                <p hidden class="ctempmaxfahrMin-1"> </p>
+                                <a hidden class="icon-1">Showers and Thundershowers</a>
+                                <a hidden class="description-1">Showers and Thundershowers</a>
+                                <a hidden class="humidity-1">35</a>
+                                <a hidden class="min-1">11</a>
+                                <a hidden class="max-1">28</a>
+                                <a hidden class="minF-1">52</a>
+                                <a hidden class="maxF-1">82</a>
+                                <a hidden class="cloudi-1">Showers and Thundershowers</a>
+                                <a hidden class="windDirec-1">SW</a>
+                                <a hidden class="windSpeed-1"></a>
+                                <a hidden class="windSpeedknots-1">0.1</a>
+                                <a hidden class="precipitationPropability-1">30</a>
+                                <a hidden class="precipitationAmount-1">3</a>
+                                <a hidden class="windGust-1">n/a</a>
+                                <a hidden class="visibility-1">Very Poor</a>
+                                <a hidden class="sunrise-1">05:36</a>
+                                <a hidden class="sunset-1">18:12</a>
+                                <a hidden class="WDS-1">NW</a>
+
+                            </div>
+                            <div class="day day-2">
+                                <h4 class="cday-2">Sunday</h4>
+                                <p class="cp-2" id="cp"><span class="ic-2 wi ../images/animated/newicons/Storm.gif"><img src="../images/animated/newicons/Storm.gif" /></span></p>
+
+                                <!--<small>Min 5&deg;C</small><br /><small>Max 12&deg;C</small>-->
+
+                                <p class="ctemp-2"><span class="celsi" style="color:red;">28&deg;</span>&nbsp;<span class="celsi" style="font-size: 15px; color:#6D6D6D;">17&deg;</span> <span class="fahr" style="color:red;" hidden>82 &deg; </span> <span class="fahr" style="font-size: 15px; color:#6D6D6D;"
+                                        hidden>63 &deg;</span></p>
+
+                                <p hidden class="ctempmax-2">20 </p>
+                                <p hidden class="ctempmaxfahr-2">68 </p>
+                                <p hidden class="ctempmaxfahrMin-2"> </p>
+                                <a hidden class="icon-2">Showers and Thundershowers</a>
+                                <a hidden class="description-2">Showers and Thundershowers</a>
+                                <a hidden class="humidity-2">35</a>
+                                <a hidden class="min-2">17</a>
+                                <a hidden class="max-2">28</a>
+                                <a hidden class="minF-2">63</a>
+                                <a hidden class="maxF-2">82</a>
+                                <a hidden class="cloudi-2">Showers and Thundershowers</a>
+                                <a hidden class="windDirec-2">SW</a>
+                                <a hidden class="windSpeed-2"></a>
+                                <a hidden class="windSpeedknots-2">0.1</a>
+                                <a hidden class="precipitationPropability-2">30</a>
+                                <a hidden class="precipitationAmount-2">3</a>
+                                <a hidden class="windGust-2">n/a</a>
+                                <a hidden class="visibility-2">Very Poor</a>
+                                <a hidden class="sunrise-2">05:35</a>
+                                <a hidden class="sunset-2">18:13</a>
+                                <a hidden class="WDS-2">NNW</a>
+
+                            </div>
+                            <div class="day day-3">
+                                <h4 class="cday-3">Monday</h4>
+                                <p class="cp-3" id="cp"><span class="ic-3 wi ../images/animated/newicons/Sunny.gif"><img src="../images/animated/newicons/Sunny.gif" /></span></p>
+
+                                <!--<small>Min 5&deg;C</small><br /><small>Max 12&deg;C</small>-->
+
+                                <p class="ctemp-3"><span class="celsi" style="color:red;">30&deg;</span>&nbsp;<span class="celsi" style="font-size: 15px; color:#6D6D6D;">17&deg;</span> <span class="fahr" style="color:red;" hidden>86 &deg; </span> <span class="fahr" style="font-size: 15px; color:#6D6D6D;"
+                                        hidden>63 &deg;</span></p>
+
+                                <p hidden class="ctempmax-3">20 </p>
+                                <p hidden class="ctempmaxfahr-3">68 </p>
+                                <p hidden class="ctempmaxfahrMin-3"> </p>
+                                <a hidden class="icon-3">mostly clear</a>
+                                <a hidden class="description-3">mostly clear</a>
+                                <a hidden class="humidity-3">30</a>
+                                <a hidden class="min-3">17</a>
+                                <a hidden class="max-3">30</a>
+                                <a hidden class="minF-3">63</a>
+                                <a hidden class="maxF-3">86</a>
+                                <a hidden class="cloudi-3">mostly clear</a>
+                                <a hidden class="windDirec-3">NNE</a>
+                                <a hidden class="windSpeed-3"></a>
+                                <a hidden class="windSpeedknots-3">10.0</a>
+                                <a hidden class="precipitationPropability-3">0</a>
+                                <a hidden class="precipitationAmount-3">0</a>
+                                <a hidden class="windGust-3">n/a</a>
+                                <a hidden class="visibility-3">Very Poor</a>
+                                <a hidden class="sunrise-3">05:34</a>
+                                <a hidden class="sunset-3">18:14</a>
+                                <a hidden class="WDS-3">NNE</a>
+
+                            </div>
+                            <div class="day day-4">
+                                <h4 class="cday-4">Tuesday</h4>
+                                <p class="cp-4" id="cp"><span class="ic-4 wi ../images/animated/newicons/Sunny.gif"><img src="../images/animated/newicons/Sunny.gif" /></span></p>
+
+                                <!--<small>Min 5&deg;C</small><br /><small>Max 12&deg;C</small>-->
+
+                                <p class="ctemp-4"><span class="celsi" style="color:red;">30&deg;</span>&nbsp;<span class="celsi" style="font-size: 15px; color:#6D6D6D;">19&deg;</span> <span class="fahr" style="color:red;" hidden>86 &deg; </span> <span class="fahr" style="font-size: 15px; color:#6D6D6D;"
+                                        hidden>66 &deg;</span></p>
+
+                                <p hidden class="ctempmax-4">20 </p>
+                                <p hidden class="ctempmaxfahr-4">68 </p>
+                                <p hidden class="ctempmaxfahrMin-4"> </p>
+                                <a hidden class="icon-4">mostly clear</a>
+                                <a hidden class="description-4">mostly clear</a>
+                                <a hidden class="humidity-4">35</a>
+                                <a hidden class="min-4">19</a>
+                                <a hidden class="max-4">30</a>
+                                <a hidden class="minF-4">66</a>
+                                <a hidden class="maxF-4">86</a>
+                                <a hidden class="cloudi-4">mostly clear</a>
+                                <a hidden class="windDirec-4">SW</a>
+                                <a hidden class="windSpeed-4"></a>
+                                <a hidden class="windSpeedknots-4">0.1</a>
+                                <a hidden class="precipitationPropability-4">0</a>
+                                <a hidden class="precipitationAmount-4">3</a>
+                                <a hidden class="windGust-4">n/a</a>
+                                <a hidden class="visibility-4">Very Poor</a>
+                                <a hidden class="sunrise-4">05:33</a>
+                                <a hidden class="sunset-4">18:14</a>
+                                <a hidden class="WDS-4">N</a>
+
+                            </div>
+                            <div class="day day-5">
+                                <h4 class="cday-5">Wednesday</h4>
+                                <p class="cp-5" id="cp"><span class="ic-5 wi ../images/animated/newicons/Drizzle.gif"><img src="../images/animated/newicons/Drizzle.gif" /></span></p>
+
+                                <!--<small>Min 5&deg;C</small><br /><small>Max 12&deg;C</small>-->
+
+                                <p class="ctemp-5"><span class="celsi" style="color:red;">29&deg;</span>&nbsp;<span class="celsi" style="font-size: 15px; color:#6D6D6D;">19&deg;</span> <span class="fahr" style="color:red;" hidden>84 &deg; </span> <span class="fahr" style="font-size: 15px; color:#6D6D6D;"
+                                        hidden>66 &deg;</span></p>
+
+                                <p hidden class="ctempmax-5">20 </p>
+                                <p hidden class="ctempmaxfahr-5">68 </p>
+                                <p hidden class="ctempmaxfahrMin-5"> </p>
+                                <a hidden class="icon-5">Rain showers</a>
+                                <a hidden class="description-5">Rain showers</a>
+                                <a hidden class="humidity-5">35</a>
+                                <a hidden class="min-5">19</a>
+                                <a hidden class="max-5">29</a>
+                                <a hidden class="minF-5">66</a>
+                                <a hidden class="maxF-5">84</a>
+                                <a hidden class="cloudi-5">Rain showers</a>
+                                <a hidden class="windDirec-5">N</a>
+                                <a hidden class="windSpeed-5"></a>
+                                <a hidden class="windSpeedknots-5">5.0</a>
+                                <a hidden class="precipitationPropability-5">0</a>
+                                <a hidden class="precipitationAmount-5">0</a>
+                                <a hidden class="windGust-5">n/a</a>
+                                <a hidden class="visibility-5">Very Poor</a>
+                                <a hidden class="sunrise-5">05:32</a>
+                                <a hidden class="sunset-5">18:15</a>
+                                <a hidden class="WDS-5">NNE</a>
+
+                            </div>
+                            <div class="day day-6">
+                                <h4 class="cday-6">Thursday</h4>
+                                <p class="cp-6" id="cp"><span class="ic-6 wi ../images/animated/newicons/Partly Cloudy.gif"><img src="../images/animated/newicons/Partly Cloudy.gif" /></span></p>
+
+                                <!--<small>Min 5&deg;C</small><br /><small>Max 12&deg;C</small>-->
+
+                                <p class="ctemp-6"><span class="celsi" style="color:red;">29&deg;</span>&nbsp;<span class="celsi" style="font-size: 15px; color:#6D6D6D;">15&deg;</span> <span class="fahr" style="color:red;" hidden>84 &deg; </span> <span class="fahr" style="font-size: 15px; color:#6D6D6D;"
+                                        hidden>59 &deg;</span></p>
+
+                                <p hidden class="ctempmax-6">20 </p>
+                                <p hidden class="ctempmaxfahr-6">68 </p>
+                                <p hidden class="ctempmaxfahrMin-6"> </p>
+                                <a hidden class="icon-6">partly cloudy</a>
+                                <a hidden class="description-6">partly cloudy</a>
+                                <a hidden class="humidity-6">35</a>
+                                <a hidden class="min-6">15</a>
+                                <a hidden class="max-6">29</a>
+                                <a hidden class="minF-6">59</a>
+                                <a hidden class="maxF-6">84</a>
+                                <a hidden class="cloudi-6">partly cloudy</a>
+                                <a hidden class="windDirec-6">SW</a>
+                                <a hidden class="windSpeed-6"></a>
+                                <a hidden class="windSpeedknots-6">0.1</a>
+                                <a hidden class="precipitationPropability-6">0</a>
+                                <a hidden class="precipitationAmount-6">0</a>
+                                <a hidden class="windGust-6">n/a</a>
+                                <a hidden class="visibility-6">Very Poor</a>
+                                <a hidden class="sunrise-6">05:31</a>
+                                <a hidden class="sunset-6">18:15</a>
+                                <a hidden class="WDS-6">N</a>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <!--<div class="weather">
+                    <h2>Additional Information</h2>
+                </div>-->
+
+                    <div class="panel panel-default" style="-ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80); filter: alpha(opacity=80); -moz-opacity: 0.8; -khtml-opacity: 0.8; opacity: 0.8">
+                        <div class="panel-heading" style="padding: 20px 0px 10px 20px;">
+                            <span class="dayDesc2" style="font-weight: bolder; font-size: 14px;"></span><span style="font-weight: bolder; font-size: 14px">'s Weather Condition</span>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="list-unstyled list-group">
+                                <li class="list-group-item"><a><span class="wi wi-humidity"></span> Humidity </a><a><span class="pull-right humiditySide">40%</span></a></li>
+                                <li class="list-group-item"><a><span class="wi wi-thermometer"></span> Min Temperature </a><a><span class="pull-right minSide celsi">10 &deg;C</span> <span class="pull-right minSide fahr" hidden>50 &deg;F</span></a></li>
+                                <li class="list-group-item"><a><span class="wi wi-thermometer"></span> Max Temperature </a><a><span class="pull-right maxSide celsi">27 &deg;C</span> <span class="pull-right maxSide fahr" hidden>81 &deg;F</span></a></li>
+                                <li class="list-group-item"><a><span class="wi wi-raindrop"></span> Weather Condition </a><a><span class="pull-right cloudiSide" style="text-transform: capitalize;">Showers and Thundershowers</span></a></li>
+                                <li class="list-group-item"><a><span class="wi wi-wind-direction"></span> Wind Direction </a><a><span class="pull-right windDirecSide">N</span></a></li>
+                                <li class="list-group-item"><a><span class="wi wi-windy"></span> Wind Speed </a><a><span class="pull-right windSpeedKnotsSide">5.0 kt</span><span class="pull-right ">9.3 km/h &nbsp; | &nbsp; </span></a></li>
+                                <li class="list-group-item"><a><span class="wi wi-raindrop"></span> Rain Amount </a><a><span class="pull-right PrecipitationAmountSide">3 mm</span></a></li>
+                                <li class="list-group-item"><a><span class="wi wi-raindrop"></span> Rain Probability </a><a><span class="pull-right PrecipitationPropabilitySide"> 30 % </span></a></li>
+                                <li class="list-group-item"><a><span class="wi wi-sunrise"></span> Sunrise / Sunset </a><a><span class="pull-right sunsetSide">18:11 </span> <span class="pull-right sunriseSide">05:38 /</span></a></li>
+                            </ul>
+                            <form class="search-form cmxform" id="form1" role="passcity" style="padding: 0px;margin: 0px;" action="/home/passcity" method="post">
+                                <input type="text" class="hidden" id="hiddensearch" minlength="3" name="passcity" autocomplete="off" value="Johannesburg" />
+                                <button class="btn btn-block btn-warning" style="color: #000;" id="addcookie" type="submit"><i class=""></i>View Detailed Forecast</button>
+                                <input name="__RequestVerificationToken" type="hidden" value="CfDJ8MYQNqDTJnNNnsoHOr1U7-VdOuX1ACr-IIrV-hqKSDKRnBtiCIu0SR3pbEpTf6lnHIhDMpb_VvGaMLhtzRZhsnCDOgUisu64Ml5VcPr_brV1dLFY8nuaSex0f1Wt9pJEa_Mie5RxYsteAUHMC8q9Dgk" /></form>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="container body-content">
+
+        <div class="row">
+            <div class="col-sm-7 topCities">
+                <table class="table" id="tablePopCities">
+                    <thead>
+                        <tr>
+                            <th>Popular Cities </th>
+                            <th> Today </th>
+                            <th> Saturday </th>
+                            <th> Sunday </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td>Pretoria</td>
+                            <td><span class="celsi" style="color:red;"><span class="../images/animated/newicons/Storm.gif"><img src="../images/animated/newicons/Storm.gif" width="40px" height="40px" /></span>30&deg; </span><span class="celsi" style="font-size: 13px;">11&deg;</span>                                <span class="fahr" style="color:red;" hidden> <span class="../images/animated/newicons/Storm.gif"><img src="../images/animated/newicons/Storm.gif" width="40px" height="40px" /></span>86 &deg; </span> <span class="fahr"
+                                    style="font-size: 13px; color:#6D6D6D;" hidden>52 &deg;</span> </td>
+                            <td><span class="celsi" style="color:red;"><span class="../images/animated/newicons/Storm.gif"><img src="../images/animated/newicons/Storm.gif" width="40px" height="40px" /></span>29&deg; </span><span class="celsi" style="font-size: 13px;">12&deg;</span>                                <span class="fahr" style="color:red;" hidden> <span class="../images/animated/newicons/Storm.gif"><img src="../images/animated/newicons/Storm.gif" width="40px" height="40px" /></span>84 &deg; </span> <span class="fahr"
+                                    style="font-size: 13px; color:#6D6D6D;" hidden>54 &deg;</span> </td>
+                            <td><span class="celsi" style="color:red;"><span class="../images/animated/newicons/Storm.gif"><img src="../images/animated/newicons/Storm.gif" width="40px" height="40px" /></span>31&deg; </span><span class="celsi" style="font-size: 13px;">20&deg;</span>                                <span class="fahr" style="color:red;" hidden> <span class="../images/animated/newicons/Storm.gif"><img src="../images/animated/newicons/Storm.gif" width="40px" height="40px" /></span>88 &deg; </span> <span class="fahr"
+                                    style="font-size: 13px; color:#6D6D6D;" hidden>68 &deg;</span> </td>
+                        </tr>
+                        <tr>
+                            <td>Johannesburg</td>
+                            <td><span class="celsi" style="color:red;"><span class="../images/animated/newicons/Storm.gif"><img src="../images/animated/newicons/Storm.gif" width="40px" height="40px" /></span>27&deg; </span><span class="celsi" style="font-size: 13px;">10&deg;</span>                                <span class="fahr" style="color:red;" hidden> <span class="../images/animated/newicons/Storm.gif"><img src="../images/animated/newicons/Storm.gif" width="40px" height="40px" /></span>81 &deg; </span> <span class="fahr"
+                                    style="font-size: 13px; color:#6D6D6D;" hidden>50 &deg;</span> </td>
+                            <td><span class="celsi" style="color:red;"><span class="../images/animated/newicons/Storm.gif"><img src="../images/animated/newicons/Storm.gif" width="40px" height="40px" /></span>28&deg; </span><span class="celsi" style="font-size: 13px;">11&deg;</span>                                <span class="fahr" style="color:red;" hidden> <span class="../images/animated/newicons/Storm.gif"><img src="../images/animated/newicons/Storm.gif" width="40px" height="40px" /></span>82 &deg; </span> <span class="fahr"
+                                    style="font-size: 13px; color:#6D6D6D;" hidden>52 &deg;</span> </td>
+                            <td><span class="celsi" style="color:red;"><span class="../images/animated/newicons/Storm.gif"><img src="../images/animated/newicons/Storm.gif" width="40px" height="40px" /></span>28&deg; </span><span class="celsi" style="font-size: 13px;">17&deg;</span>                                <span class="fahr" style="color:red;" hidden> <span class="../images/animated/newicons/Storm.gif"><img src="../images/animated/newicons/Storm.gif" width="40px" height="40px" /></span>82 &deg; </span> <span class="fahr"
+                                    style="font-size: 13px; color:#6D6D6D;" hidden>63 &deg;</span> </td>
+                        </tr>
+                        <tr>
+                            <td>Cape Town</td>
+                            <td><span class="celsi" style="color:red;"><span class="../images/animated/newicons/Clear Night.gif"><img src="../images/animated/newicons/Clear Night.gif" width="40px" height="40px" /></span>26&deg; </span><span class="celsi"
+                                    style="font-size: 13px;">15&deg;</span> <span class="fahr" style="color:red;" hidden> <span class="../images/animated/newicons/Clear Night.gif"><img src="../images/animated/newicons/Clear Night.gif" width="40px" height="40px" /></span>79
+                                &deg; </span> <span class="fahr" style="font-size: 13px; color:#6D6D6D;" hidden>59 &deg;</span> </td>
+                            <td><span class="celsi" style="color:red;"><span class="../images/animated/newicons/Sunny.gif"><img src="../images/animated/newicons/Sunny.gif" width="40px" height="40px" /></span>24&deg; </span><span class="celsi" style="font-size: 13px;">15&deg;</span>                                <span class="fahr" style="color:red;" hidden> <span class="../images/animated/newicons/Sunny.gif"><img src="../images/animated/newicons/Sunny.gif" width="40px" height="40px" /></span>75 &deg; </span> <span class="fahr"
+                                    style="font-size: 13px; color:#6D6D6D;" hidden>59 &deg;</span> </td>
+                            <td><span class="celsi" style="color:red;"><span class="../images/animated/newicons/Sunny.gif"><img src="../images/animated/newicons/Sunny.gif" width="40px" height="40px" /></span>23&deg; </span><span class="celsi" style="font-size: 13px;">14&deg;</span>                                <span class="fahr" style="color:red;" hidden> <span class="../images/animated/newicons/Sunny.gif"><img src="../images/animated/newicons/Sunny.gif" width="40px" height="40px" /></span>73 &deg; </span> <span class="fahr"
+                                    style="font-size: 13px; color:#6D6D6D;" hidden>57 &deg;</span> </td>
+                        </tr>
+                        <tr>
+                            <td>Durban</td>
+                            <td><span class="celsi" style="color:red;"><span class="../images/animated/newicons/Partly Cloudy Night.gif"><img src="../images/animated/newicons/Partly Cloudy Night.gif" width="40px" height="40px" /></span>28&deg; </span>
+                                <span
+                                    class="celsi" style="font-size: 13px;">20&deg;</span> <span class="fahr" style="color:red;" hidden> <span class="../images/animated/newicons/Partly Cloudy Night.gif"><img src="../images/animated/newicons/Partly Cloudy Night.gif" width="40px" height="40px" /></span>82
+                                    &deg; </span> <span class="fahr" style="font-size: 13px; color:#6D6D6D;" hidden>68 &deg;</span> </td>
+                            <td><span class="celsi" style="color:red;"><span class="../images/animated/newicons/Storm.gif"><img src="../images/animated/newicons/Storm.gif" width="40px" height="40px" /></span>27&deg; </span><span class="celsi" style="font-size: 13px;">20&deg;</span>                                <span class="fahr" style="color:red;" hidden> <span class="../images/animated/newicons/Storm.gif"><img src="../images/animated/newicons/Storm.gif" width="40px" height="40px" /></span>81 &deg; </span> <span class="fahr"
+                                    style="font-size: 13px; color:#6D6D6D;" hidden>68 &deg;</span> </td>
+                            <td><span class="celsi" style="color:red;"><span class="../images/animated/newicons/Storm.gif"><img src="../images/animated/newicons/Storm.gif" width="40px" height="40px" /></span>23&deg; </span><span class="celsi" style="font-size: 13px;">21&deg;</span>                                <span class="fahr" style="color:red;" hidden> <span class="../images/animated/newicons/Storm.gif"><img src="../images/animated/newicons/Storm.gif" width="40px" height="40px" /></span>73 &deg; </span> <span class="fahr"
+                                    style="font-size: 13px; color:#6D6D6D;" hidden>70 &deg;</span> </td>
+                        </tr>
+                        <tr>
+                            <td>Bloemfontein</td>
+                            <td><span class="celsi" style="color:red;"><span class="../images/animated/newicons/Storm.gif"><img src="../images/animated/newicons/Storm.gif" width="40px" height="40px" /></span>30&deg; </span><span class="celsi" style="font-size: 13px;">15&deg;</span>                                <span class="fahr" style="color:red;" hidden> <span class="../images/animated/newicons/Storm.gif"><img src="../images/animated/newicons/Storm.gif" width="40px" height="40px" /></span>86 &deg; </span> <span class="fahr"
+                                    style="font-size: 13px; color:#6D6D6D;" hidden>59 &deg;</span> </td>
+                            <td><span class="celsi" style="color:red;"><span class="../images/animated/newicons/Storm.gif"><img src="../images/animated/newicons/Storm.gif" width="40px" height="40px" /></span>27&deg; </span><span class="celsi" style="font-size: 13px;">15&deg;</span>                                <span class="fahr" style="color:red;" hidden> <span class="../images/animated/newicons/Storm.gif"><img src="../images/animated/newicons/Storm.gif" width="40px" height="40px" /></span>81 &deg; </span> <span class="fahr"
+                                    style="font-size: 13px; color:#6D6D6D;" hidden>59 &deg;</span> </td>
+                            <td><span class="celsi" style="color:red;"><span class="../images/animated/newicons/Partly Cloudy.gif"><img src="../images/animated/newicons/Partly Cloudy.gif" width="40px" height="40px" /></span>26&deg; </span><span class="celsi"
+                                    style="font-size: 13px;">14&deg;</span> <span class="fahr" style="color:red;" hidden> <span class="../images/animated/newicons/Partly Cloudy.gif"><img src="../images/animated/newicons/Partly Cloudy.gif" width="40px" height="40px" /></span>79
+                                &deg; </span> <span class="fahr" style="font-size: 13px; color:#6D6D6D;" hidden>57 &deg;</span> </td>
+                        </tr>
+                        <tr>
+                            <td>Polokwane</td>
+                            <td><span class="celsi" style="color:red;"><span class="../images/animated/newicons/Storm.gif"><img src="../images/animated/newicons/Storm.gif" width="40px" height="40px" /></span>26&deg; </span><span class="celsi" style="font-size: 13px;">14&deg;</span>                                <span class="fahr" style="color:red;" hidden> <span class="../images/animated/newicons/Storm.gif"><img src="../images/animated/newicons/Storm.gif" width="40px" height="40px" /></span>79 &deg; </span> <span class="fahr"
+                                    style="font-size: 13px; color:#6D6D6D;" hidden>57 &deg;</span> </td>
+                            <td><span class="celsi" style="color:red;"><span class="../images/animated/newicons/Cloudy.gif"><img src="../images/animated/newicons/Cloudy.gif" width="40px" height="40px" /></span>29&deg; </span><span class="celsi" style="font-size: 13px;">16&deg;</span>                                <span class="fahr" style="color:red;" hidden> <span class="../images/animated/newicons/Cloudy.gif"><img src="../images/animated/newicons/Cloudy.gif" width="40px" height="40px" /></span>84 &deg; </span> <span class="fahr"
+                                    style="font-size: 13px; color:#6D6D6D;" hidden>61 &deg;</span> </td>
+                            <td><span class="celsi" style="color:red;"><span class="../images/animated/newicons/Partly Cloudy.gif"><img src="../images/animated/newicons/Partly Cloudy.gif" width="40px" height="40px" /></span>30&deg; </span><span class="celsi"
+                                    style="font-size: 13px;">19&deg;</span> <span class="fahr" style="color:red;" hidden> <span class="../images/animated/newicons/Partly Cloudy.gif"><img src="../images/animated/newicons/Partly Cloudy.gif" width="40px" height="40px" /></span>86
+                                &deg; </span> <span class="fahr" style="font-size: 13px; color:#6D6D6D;" hidden>66 &deg;</span> </td>
+                        </tr>
+                        <tr>
+                            <td>Upington</td>
+                            <td><span class="celsi" style="color:red;"><span class="../images/animated/newicons/Storm.gif"><img src="../images/animated/newicons/Storm.gif" width="40px" height="40px" /></span>35&deg; </span><span class="celsi" style="font-size: 13px;">21&deg;</span>                                <span class="fahr" style="color:red;" hidden> <span class="../images/animated/newicons/Storm.gif"><img src="../images/animated/newicons/Storm.gif" width="40px" height="40px" /></span>95 &deg; </span> <span class="fahr"
+                                    style="font-size: 13px; color:#6D6D6D;" hidden>70 &deg;</span> </td>
+                            <td><span class="celsi" style="color:red;"><span class="../images/animated/newicons/Storm.gif"><img src="../images/animated/newicons/Storm.gif" width="40px" height="40px" /></span>26&deg; </span><span class="celsi" style="font-size: 13px;">20&deg;</span>                                <span class="fahr" style="color:red;" hidden> <span class="../images/animated/newicons/Storm.gif"><img src="../images/animated/newicons/Storm.gif" width="40px" height="40px" /></span>79 &deg; </span> <span class="fahr"
+                                    style="font-size: 13px; color:#6D6D6D;" hidden>68 &deg;</span> </td>
+                            <td><span class="celsi" style="color:red;"><span class="../images/animated/newicons/Sunny.gif"><img src="../images/animated/newicons/Sunny.gif" width="40px" height="40px" /></span>29&deg; </span><span class="celsi" style="font-size: 13px;">17&deg;</span>                                <span class="fahr" style="color:red;" hidden> <span class="../images/animated/newicons/Sunny.gif"><img src="../images/animated/newicons/Sunny.gif" width="40px" height="40px" /></span>84 &deg; </span> <span class="fahr"
+                                    style="font-size: 13px; color:#6D6D6D;" hidden>63 &deg;</span> </td>
+                        </tr>
+                        <tr>
+                            <td>Port Elizabeth</td>
+                            <td><span class="celsi" style="color:red;"><span class="../images/animated/newicons/Drizzle Night.gif"><img src="../images/animated/newicons/Drizzle Night.gif" width="40px" height="40px" /></span>24&deg; </span><span class="celsi"
+                                    style="font-size: 13px;">16&deg;</span> <span class="fahr" style="color:red;" hidden> <span class="../images/animated/newicons/Drizzle Night.gif"><img src="../images/animated/newicons/Drizzle Night.gif" width="40px" height="40px" /></span>75
+                                &deg; </span> <span class="fahr" style="font-size: 13px; color:#6D6D6D;" hidden>61 &deg;</span> </td>
+                            <td><span class="celsi" style="color:red;"><span class="../images/animated/newicons/Partly Cloudy.gif"><img src="../images/animated/newicons/Partly Cloudy.gif" width="40px" height="40px" /></span>21&deg; </span><span class="celsi"
+                                    style="font-size: 13px;">15&deg;</span> <span class="fahr" style="color:red;" hidden> <span class="../images/animated/newicons/Partly Cloudy.gif"><img src="../images/animated/newicons/Partly Cloudy.gif" width="40px" height="40px" /></span>70
+                                &deg; </span> <span class="fahr" style="font-size: 13px; color:#6D6D6D;" hidden>59 &deg;</span> </td>
+                            <td><span class="celsi" style="color:red;"><span class="../images/animated/newicons/Drizzle.gif"><img src="../images/animated/newicons/Drizzle.gif" width="40px" height="40px" /></span>19&deg; </span><span class="celsi" style="font-size: 13px;">16&deg;</span>                                <span class="fahr" style="color:red;" hidden> <span class="../images/animated/newicons/Drizzle.gif"><img src="../images/animated/newicons/Drizzle.gif" width="40px" height="40px" /></span>66 &deg; </span> <span class="fahr"
+                                    style="font-size: 13px; color:#6D6D6D;" hidden>61 &deg;</span> </td>
+                        </tr>
+                        <tr>
+                            <td>East London</td>
+                            <td><span class="celsi" style="color:red;"><span class="../images/animated/newicons/Partly Cloudy Night.gif"><img src="../images/animated/newicons/Partly Cloudy Night.gif" width="40px" height="40px" /></span>27&deg; </span>
+                                <span
+                                    class="celsi" style="font-size: 13px;">15&deg;</span> <span class="fahr" style="color:red;" hidden> <span class="../images/animated/newicons/Partly Cloudy Night.gif"><img src="../images/animated/newicons/Partly Cloudy Night.gif" width="40px" height="40px" /></span>81
+                                    &deg; </span> <span class="fahr" style="font-size: 13px; color:#6D6D6D;" hidden>59 &deg;</span> </td>
+                            <td><span class="celsi" style="color:red;"><span class="../images/animated/newicons/Drizzle.gif"><img src="../images/animated/newicons/Drizzle.gif" width="40px" height="40px" /></span>22&deg; </span><span class="celsi" style="font-size: 13px;">18&deg;</span>                                <span class="fahr" style="color:red;" hidden> <span class="../images/animated/newicons/Drizzle.gif"><img src="../images/animated/newicons/Drizzle.gif" width="40px" height="40px" /></span>72 &deg; </span> <span class="fahr"
+                                    style="font-size: 13px; color:#6D6D6D;" hidden>64 &deg;</span> </td>
+                            <td><span class="celsi" style="color:red;"><span class="../images/animated/newicons/Drizzle.gif"><img src="../images/animated/newicons/Drizzle.gif" width="40px" height="40px" /></span>20&deg; </span><span class="celsi" style="font-size: 13px;">18&deg;</span>                                <span class="fahr" style="color:red;" hidden> <span class="../images/animated/newicons/Drizzle.gif"><img src="../images/animated/newicons/Drizzle.gif" width="40px" height="40px" /></span>68 &deg; </span> <span class="fahr"
+                                    style="font-size: 13px; color:#6D6D6D;" hidden>64 &deg;</span> </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-sm-5 general_warnings">
+                <ul class="nav nav-tabs nav-tab-Head warning-tabs">
+                    <li class="active">
+                        <a data-toggle="tab" href="#home">
+                            <h3 class="tab-heading-warning"><i class="fa fa-warning"></i> Weather Alerts </h3>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+                    <div id="home" class="tab-pane fade in active">
+                        <div class="list-group warning_list">
+                            <a class="list-group-item" href="/home/warningsfdi">
+                                <h3> Veld Fire Conditions <span> Dr Beyers Naude - Graaff-Reinet / Graaff - Reinet</span> </h3>
+                                <span class="alertDura"> 10/10/2025 10:00:00 AM to 10/10/2025 8:59:59 PM </span>
+                                <p> Damage to property, loss of grazing land and possible loss of human and/or animal life. <span>Warning</span> </p>
+                                <!--<p> Damage to property, loss of grazing land and possible loss of human and/or animal life.  </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warningsfdi">
+                                <h3> Veld Fire Conditions <span> Enoch Magijima - Komani / Komani/Queenstown</span> </h3>
+                                <span class="alertDura"> 10/10/2025 10:00:00 AM to 10/10/2025 8:59:59 PM </span>
+                                <p> Damage to property, loss of grazing land and possible loss of human and/or animal life. <span>Warning</span> </p>
+                                <!--<p> Damage to property, loss of grazing land and possible loss of human and/or animal life.  </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warningsfdi">
+                                <h3> Veld Fire Conditions <span> Ngqushwa / Peddie</span> </h3>
+                                <span class="alertDura"> 10/10/2025 10:00:00 AM to 10/10/2025 8:59:59 PM </span>
+                                <p> Damage to property, loss of grazing land and possible loss of human and/or animal life. <span>Warning</span> </p>
+                                <!--<p> Damage to property, loss of grazing land and possible loss of human and/or animal life.  </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warningsfdi">
+                                <h3> Veld Fire Conditions <span> Blue Crane Route / Somerset East</span> </h3>
+                                <span class="alertDura"> 10/10/2025 10:00:00 AM to 10/10/2025 8:59:59 PM </span>
+                                <p> Damage to property, loss of grazing land and possible loss of human and/or animal life. <span>Warning</span> </p>
+                                <!--<p> Damage to property, loss of grazing land and possible loss of human and/or animal life.  </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warningsfdi">
+                                <h3> Veld Fire Conditions <span> Enoch Magijima - Tarkastad / Tarkastad</span> </h3>
+                                <span class="alertDura"> 10/10/2025 10:00:00 AM to 10/10/2025 8:59:59 PM </span>
+                                <p> Damage to property, loss of grazing land and possible loss of human and/or animal life. <span>Warning</span> </p>
+                                <!--<p> Damage to property, loss of grazing land and possible loss of human and/or animal life.  </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warningsfdi">
+                                <h3> Veld Fire Conditions <span> Raymond Mhlaba - Adelaide / Adelaide</span> </h3>
+                                <span class="alertDura"> 10/10/2025 10:00:00 AM to 10/10/2025 8:59:59 PM </span>
+                                <p> Damage to property, loss of grazing land and possible loss of human and/or animal life. <span>Warning</span> </p>
+                                <!--<p> Damage to property, loss of grazing land and possible loss of human and/or animal life.  </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warningsfdi">
+                                <h3> Veld Fire Conditions <span> Raymond Mhlaba - Fort Beaufort / Fort Beaufort</span> </h3>
+                                <span class="alertDura"> 10/10/2025 10:00:00 AM to 10/10/2025 8:59:59 PM </span>
+                                <p> Damage to property, loss of grazing land and possible loss of human and/or animal life. <span>Warning</span> </p>
+                                <!--<p> Damage to property, loss of grazing land and possible loss of human and/or animal life.  </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warningsfdi">
+                                <h3> Veld Fire Conditions <span> Amahlathi / Stutterheim</span> </h3>
+                                <span class="alertDura"> 10/10/2025 10:00:00 AM to 10/10/2025 8:59:59 PM </span>
+                                <p> Damage to property, loss of grazing land and possible loss of human and/or animal life. <span>Warning</span> </p>
+                                <!--<p> Damage to property, loss of grazing land and possible loss of human and/or animal life.  </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warningsfdi">
+                                <h3> Veld Fire Conditions <span> Intsika Yethu / Cofimvaba</span> </h3>
+                                <span class="alertDura"> 10/10/2025 10:00:00 AM to 10/10/2025 8:59:59 PM </span>
+                                <p> Damage to property, loss of grazing land and possible loss of human and/or animal life. <span>Warning</span> </p>
+                                <!--<p> Damage to property, loss of grazing land and possible loss of human and/or animal life.  </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warningsfdi">
+                                <h3> Veld Fire Conditions <span> Dr Beyers Naude - Jansenville / Jansenville</span> </h3>
+                                <span class="alertDura"> 10/10/2025 10:00:00 AM to 10/10/2025 8:59:59 PM </span>
+                                <p> Damage to property, loss of grazing land and possible loss of human and/or animal life. <span>Warning</span> </p>
+                                <!--<p> Damage to property, loss of grazing land and possible loss of human and/or animal life.  </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warningsfdi">
+                                <h3> Veld Fire Conditions <span> Inxuba Yethemba / Cradock</span> </h3>
+                                <span class="alertDura"> 10/10/2025 10:00:00 AM to 10/10/2025 8:59:59 PM </span>
+                                <p> Damage to property, loss of grazing land and possible loss of human and/or animal life. <span>Warning</span> </p>
+                                <!--<p> Damage to property, loss of grazing land and possible loss of human and/or animal life.  </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warnings">
+                                <h3> Severe Thunderstorms <span> Thabazimbi</span> </h3>
+                                <span class="alertDura"> 10/10/2025 8:00:00 AM to 10/13/2025 11:59:59 PM </span>
+                                <p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localised damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Disruption of services
+                                    such as power surges and bodily injuries caused by lightning. <span> Warning</span> </p>
+                                <!--<p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localised damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Disruption of services such as power surges and bodily injuries caused by lightning. </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warnings">
+                                <h3> Severe Thunderstorms <span> City of Tshwane / Pretoria</span> </h3>
+                                <span class="alertDura"> 10/10/2025 8:00:00 AM to 10/13/2025 11:59:59 PM </span>
+                                <p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localised damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Disruption of services
+                                    such as power surges and bodily injuries caused by lightning. <span> Warning</span> </p>
+                                <!--<p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localised damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Disruption of services such as power surges and bodily injuries caused by lightning. </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warnings">
+                                <h3> Severe Thunderstorms <span> Bela-Bela</span> </h3>
+                                <span class="alertDura"> 10/10/2025 8:00:00 AM to 10/13/2025 11:59:59 PM </span>
+                                <p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localised damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Disruption of services
+                                    such as power surges and bodily injuries caused by lightning. <span> Warning</span> </p>
+                                <!--<p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localised damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Disruption of services such as power surges and bodily injuries caused by lightning. </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warnings">
+                                <h3> Severe Thunderstorms <span> Victor Khanye / Delmas</span> </h3>
+                                <span class="alertDura"> 10/10/2025 8:00:00 AM to 10/13/2025 11:59:59 PM </span>
+                                <p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localised damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Disruption of services
+                                    such as power surges and bodily injuries caused by lightning. <span> Warning</span> </p>
+                                <!--<p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localised damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Disruption of services such as power surges and bodily injuries caused by lightning. </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warnings">
+                                <h3> Severe Thunderstorms <span> Thembisile Hani / Tweefontein</span> </h3>
+                                <span class="alertDura"> 10/10/2025 8:00:00 AM to 10/13/2025 11:59:59 PM </span>
+                                <p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localised damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Disruption of services
+                                    such as power surges and bodily injuries caused by lightning. <span> Warning</span> </p>
+                                <!--<p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localised damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Disruption of services such as power surges and bodily injuries caused by lightning. </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warnings">
+                                <h3> Severe Thunderstorms <span> Mogalakwena / Mokopane</span> </h3>
+                                <span class="alertDura"> 10/10/2025 3:00:00 PM to 10/10/2025 11:59:59 PM </span>
+                                <p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localized damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Large amounts of small
+                                    and/or large hail over an open area. <span> Warning</span> </p>
+                                <!--<p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localized damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Large amounts of small and/or large hail over an open area. </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warnings">
+                                <h3> Severe Thunderstorms <span> Lepele-Nkumpi / Mogoto</span> </h3>
+                                <span class="alertDura"> 10/10/2025 3:00:00 PM to 10/10/2025 11:59:59 PM </span>
+                                <p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localized damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Large amounts of small
+                                    and/or large hail over an open area. <span> Warning</span> </p>
+                                <!--<p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localized damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Large amounts of small and/or large hail over an open area. </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warnings">
+                                <h3> Severe Thunderstorms <span> Thaba Chweu / Sabie</span> </h3>
+                                <span class="alertDura"> 10/10/2025 3:00:00 PM to 10/10/2025 11:59:59 PM </span>
+                                <p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localized damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Large amounts of small
+                                    and/or large hail over an open area. <span> Warning</span> </p>
+                                <!--<p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localized damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Large amounts of small and/or large hail over an open area. </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warnings">
+                                <h3> Severe Thunderstorms <span> Mbombela - Barberton / Barberton</span> </h3>
+                                <span class="alertDura"> 10/10/2025 3:00:00 PM to 10/10/2025 11:59:59 PM </span>
+                                <p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localized damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Large amounts of small
+                                    and/or large hail over an open area. <span> Warning</span> </p>
+                                <!--<p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localized damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Large amounts of small and/or large hail over an open area. </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warnings">
+                                <h3> Severe Thunderstorms <span> City of Tshwane / Pretoria</span> </h3>
+                                <span class="alertDura"> 10/10/2025 3:00:00 PM to 10/10/2025 11:59:59 PM </span>
+                                <p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localized damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Large amounts of small
+                                    and/or large hail over an open area. <span> Warning</span> </p>
+                                <!--<p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localized damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Large amounts of small and/or large hail over an open area. </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warnings">
+                                <h3> Severe Thunderstorms <span> Bela-Bela</span> </h3>
+                                <span class="alertDura"> 10/10/2025 3:00:00 PM to 10/10/2025 11:59:59 PM </span>
+                                <p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localized damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Large amounts of small
+                                    and/or large hail over an open area. <span> Warning</span> </p>
+                                <!--<p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localized damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Large amounts of small and/or large hail over an open area. </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warnings">
+                                <h3> Severe Thunderstorms <span> Mbombela - Sabie / Whiteriver / Mbombela</span> </h3>
+                                <span class="alertDura"> 10/10/2025 3:00:00 PM to 10/10/2025 11:59:59 PM </span>
+                                <p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localized damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Large amounts of small
+                                    and/or large hail over an open area. <span> Warning</span> </p>
+                                <!--<p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localized damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Large amounts of small and/or large hail over an open area. </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warnings">
+                                <h3> Severe Thunderstorms <span> Dr JS Moroka / Nokaneng</span> </h3>
+                                <span class="alertDura"> 10/10/2025 3:00:00 PM to 10/10/2025 11:59:59 PM </span>
+                                <p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localized damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Large amounts of small
+                                    and/or large hail over an open area. <span> Warning</span> </p>
+                                <!--<p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localized damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Large amounts of small and/or large hail over an open area. </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warnings">
+                                <h3> Severe Thunderstorms <span> Fetakgomo/Greater Tubatse - Appel / Fetakgomo/Apel</span> </h3>
+                                <span class="alertDura"> 10/10/2025 3:00:00 PM to 10/10/2025 11:59:59 PM </span>
+                                <p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localized damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Large amounts of small
+                                    and/or large hail over an open area. <span> Warning</span> </p>
+                                <!--<p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localized damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Large amounts of small and/or large hail over an open area. </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warnings">
+                                <h3> Severe Thunderstorms <span> Victor Khanye / Delmas</span> </h3>
+                                <span class="alertDura"> 10/10/2025 3:00:00 PM to 10/10/2025 11:59:59 PM </span>
+                                <p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localized damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Large amounts of small
+                                    and/or large hail over an open area. <span> Warning</span> </p>
+                                <!--<p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localized damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Large amounts of small and/or large hail over an open area. </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warnings">
+                                <h3> Severe Thunderstorms <span> Makhuduthamaga / Makhuduthamaga/Jane Furse</span> </h3>
+                                <span class="alertDura"> 10/10/2025 3:00:00 PM to 10/10/2025 11:59:59 PM </span>
+                                <p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localized damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Large amounts of small
+                                    and/or large hail over an open area. <span> Warning</span> </p>
+                                <!--<p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localized damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Large amounts of small and/or large hail over an open area. </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warnings">
+                                <h3> Severe Thunderstorms <span> Fetakgomo/Greater Tubatse - Burgersfort / Tubatse/</span> </h3>
+                                <span class="alertDura"> 10/10/2025 3:00:00 PM to 10/10/2025 11:59:59 PM </span>
+                                <p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localized damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Large amounts of small
+                                    and/or large hail over an open area. <span> Warning</span> </p>
+                                <!--<p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localized damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Large amounts of small and/or large hail over an open area. </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warnings">
+                                <h3> Severe Thunderstorms <span> Elias Motsoaledi / Groblersdal</span> </h3>
+                                <span class="alertDura"> 10/10/2025 3:00:00 PM to 10/10/2025 11:59:59 PM </span>
+                                <p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localized damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Large amounts of small
+                                    and/or large hail over an open area. <span> Warning</span> </p>
+                                <!--<p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localized damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Large amounts of small and/or large hail over an open area. </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warnings">
+                                <h3> Severe Thunderstorms <span> Emalahleni / Emalahleni/Witbank</span> </h3>
+                                <span class="alertDura"> 10/10/2025 3:00:00 PM to 10/10/2025 11:59:59 PM </span>
+                                <p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localized damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Large amounts of small
+                                    and/or large hail over an open area. <span> Warning</span> </p>
+                                <!--<p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localized damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Large amounts of small and/or large hail over an open area. </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warnings">
+                                <h3> Severe Thunderstorms <span> Polokwane</span> </h3>
+                                <span class="alertDura"> 10/10/2025 3:00:00 PM to 10/10/2025 11:59:59 PM </span>
+                                <p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localized damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Large amounts of small
+                                    and/or large hail over an open area. <span> Warning</span> </p>
+                                <!--<p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localized damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Large amounts of small and/or large hail over an open area. </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warnings">
+                                <h3> Severe Thunderstorms <span> Modimolle/Mookgopong - Mookgopong / Mookgopong</span> </h3>
+                                <span class="alertDura"> 10/10/2025 3:00:00 PM to 10/10/2025 11:59:59 PM </span>
+                                <p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localized damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Large amounts of small
+                                    and/or large hail over an open area. <span> Warning</span> </p>
+                                <!--<p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localized damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Large amounts of small and/or large hail over an open area. </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warnings">
+                                <h3> Severe Thunderstorms <span> Thembisile Hani / Tweefontein</span> </h3>
+                                <span class="alertDura"> 10/10/2025 3:00:00 PM to 10/10/2025 11:59:59 PM </span>
+                                <p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localized damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Large amounts of small
+                                    and/or large hail over an open area. <span> Warning</span> </p>
+                                <!--<p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localized damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Large amounts of small and/or large hail over an open area. </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warnings">
+                                <h3> Severe Thunderstorms <span> Polokwane - Moletji / Moletji</span> </h3>
+                                <span class="alertDura"> 10/10/2025 3:00:00 PM to 10/10/2025 11:59:59 PM </span>
+                                <p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localized damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Large amounts of small
+                                    and/or large hail over an open area. <span> Warning</span> </p>
+                                <!--<p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localized damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Large amounts of small and/or large hail over an open area. </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warnings">
+                                <h3> Severe Thunderstorms <span> Albert Luthuli / Carolina</span> </h3>
+                                <span class="alertDura"> 10/10/2025 3:00:00 PM to 10/10/2025 11:59:59 PM </span>
+                                <p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localized damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Large amounts of small
+                                    and/or large hail over an open area. <span> Warning</span> </p>
+                                <!--<p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localized damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Large amounts of small and/or large hail over an open area. </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warnings">
+                                <h3> Severe Thunderstorms <span> Steve Tshwete / Middelburg</span> </h3>
+                                <span class="alertDura"> 10/10/2025 3:00:00 PM to 10/10/2025 11:59:59 PM </span>
+                                <p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localized damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Large amounts of small
+                                    and/or large hail over an open area. <span> Warning</span> </p>
+                                <!--<p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localized damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Large amounts of small and/or large hail over an open area. </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warnings">
+                                <h3> Severe Thunderstorms <span> Modimolle/Mookgopong - Vaalwater / Vaalwater</span> </h3>
+                                <span class="alertDura"> 10/10/2025 3:00:00 PM to 10/10/2025 11:59:59 PM </span>
+                                <p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localized damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Large amounts of small
+                                    and/or large hail over an open area. <span> Warning</span> </p>
+                                <!--<p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localized damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Large amounts of small and/or large hail over an open area. </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warnings">
+                                <h3> Severe Thunderstorms <span> Emakhazeni / Machadodorp</span> </h3>
+                                <span class="alertDura"> 10/10/2025 3:00:00 PM to 10/10/2025 11:59:59 PM </span>
+                                <p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localized damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Large amounts of small
+                                    and/or large hail over an open area. <span> Warning</span> </p>
+                                <!--<p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localized damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Large amounts of small and/or large hail over an open area. </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warnings">
+                                <h3> Severe Thunderstorms <span> Ephraim Mogale / Marble Hall</span> </h3>
+                                <span class="alertDura"> 10/10/2025 3:00:00 PM to 10/10/2025 11:59:59 PM </span>
+                                <p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localized damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Large amounts of small
+                                    and/or large hail over an open area. <span> Warning</span> </p>
+                                <!--<p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localized damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Large amounts of small and/or large hail over an open area. </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warnings">
+                                <h3> Severe Thunderstorms <span> Tsantsabane / Postmasburg</span> </h3>
+                                <span class="alertDura"> 10/11/2025 12:00:00 PM to 10/11/2025 6:59:59 PM </span>
+                                <p> Large amounts of small hail over an open area.&#xD;&#xA;Localised flooding of susceptible roads, low-lying areas and bridges. <span> Warning</span> </p>
+                                <!--<p> Large amounts of small hail over an open area.&#xD;&#xA;Localised flooding of susceptible roads, low-lying areas and bridges. </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warnings">
+                                <h3> Severe Thunderstorms <span> Mangaung - Naledi / Vryburg</span> </h3>
+                                <span class="alertDura"> 10/11/2025 12:00:00 PM to 10/11/2025 6:59:59 PM </span>
+                                <p> Large amounts of small hail over an open area.&#xD;&#xA;Localised flooding of susceptible roads, low-lying areas and bridges. <span> Warning</span> </p>
+                                <!--<p> Large amounts of small hail over an open area.&#xD;&#xA;Localised flooding of susceptible roads, low-lying areas and bridges. </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warnings">
+                                <h3> Severe Thunderstorms <span> !Kheis / Groblershoop</span> </h3>
+                                <span class="alertDura"> 10/11/2025 12:00:00 PM to 10/11/2025 6:59:59 PM </span>
+                                <p> Large amounts of small hail over an open area.&#xD;&#xA;Localised flooding of susceptible roads, low-lying areas and bridges. <span> Warning</span> </p>
+                                <!--<p> Large amounts of small hail over an open area.&#xD;&#xA;Localised flooding of susceptible roads, low-lying areas and bridges. </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warnings">
+                                <h3> Severe Thunderstorms <span> Gamagara / Kathu</span> </h3>
+                                <span class="alertDura"> 10/11/2025 12:00:00 PM to 10/11/2025 6:59:59 PM </span>
+                                <p> Large amounts of small hail over an open area.&#xD;&#xA;Localised flooding of susceptible roads, low-lying areas and bridges. <span> Warning</span> </p>
+                                <!--<p> Large amounts of small hail over an open area.&#xD;&#xA;Localised flooding of susceptible roads, low-lying areas and bridges. </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warnings">
+                                <h3> Severe Thunderstorms <span> Kai !Garib / Augrabies Falls</span> </h3>
+                                <span class="alertDura"> 10/11/2025 12:00:00 PM to 10/11/2025 6:59:59 PM </span>
+                                <p> Large amounts of small hail over an open area.&#xD;&#xA;Localised flooding of susceptible roads, low-lying areas and bridges. <span> Warning</span> </p>
+                                <!--<p> Large amounts of small hail over an open area.&#xD;&#xA;Localised flooding of susceptible roads, low-lying areas and bridges. </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warnings">
+                                <h3> Severe Thunderstorms <span> Mamusa / Schweizer-Reneke</span> </h3>
+                                <span class="alertDura"> 10/11/2025 12:00:00 PM to 10/11/2025 6:59:59 PM </span>
+                                <p> Large amounts of small hail over an open area.&#xD;&#xA;Localised flooding of susceptible roads, low-lying areas and bridges. <span> Warning</span> </p>
+                                <!--<p> Large amounts of small hail over an open area.&#xD;&#xA;Localised flooding of susceptible roads, low-lying areas and bridges. </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warnings">
+                                <h3> Severe Thunderstorms <span> Magareng / Warrenton</span> </h3>
+                                <span class="alertDura"> 10/11/2025 12:00:00 PM to 10/11/2025 6:59:59 PM </span>
+                                <p> Large amounts of small hail over an open area.&#xD;&#xA;Localised flooding of susceptible roads, low-lying areas and bridges. <span> Warning</span> </p>
+                                <!--<p> Large amounts of small hail over an open area.&#xD;&#xA;Localised flooding of susceptible roads, low-lying areas and bridges. </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warnings">
+                                <h3> Severe Thunderstorms <span> Joe Morolong / Hotazel</span> </h3>
+                                <span class="alertDura"> 10/11/2025 12:00:00 PM to 10/11/2025 6:59:59 PM </span>
+                                <p> Large amounts of small hail over an open area.&#xD;&#xA;Localised flooding of susceptible roads, low-lying areas and bridges. <span> Warning</span> </p>
+                                <!--<p> Large amounts of small hail over an open area.&#xD;&#xA;Localised flooding of susceptible roads, low-lying areas and bridges. </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warnings">
+                                <h3> Severe Thunderstorms <span> Kgatelopele / Dani&#xEB;lskuil</span> </h3>
+                                <span class="alertDura"> 10/11/2025 12:00:00 PM to 10/11/2025 6:59:59 PM </span>
+                                <p> Large amounts of small hail over an open area.&#xD;&#xA;Localised flooding of susceptible roads, low-lying areas and bridges. <span> Warning</span> </p>
+                                <!--<p> Large amounts of small hail over an open area.&#xD;&#xA;Localised flooding of susceptible roads, low-lying areas and bridges. </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warnings">
+                                <h3> Severe Thunderstorms <span> Lekwa-Teemane / Bloemhof</span> </h3>
+                                <span class="alertDura"> 10/11/2025 12:00:00 PM to 10/11/2025 6:59:59 PM </span>
+                                <p> Large amounts of small hail over an open area.&#xD;&#xA;Localised flooding of susceptible roads, low-lying areas and bridges. <span> Warning</span> </p>
+                                <!--<p> Large amounts of small hail over an open area.&#xD;&#xA;Localised flooding of susceptible roads, low-lying areas and bridges. </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warnings">
+                                <h3> Severe Thunderstorms <span> Dawid Kruiper - Upington / Upington</span> </h3>
+                                <span class="alertDura"> 10/11/2025 12:00:00 PM to 10/11/2025 6:59:59 PM </span>
+                                <p> Large amounts of small hail over an open area.&#xD;&#xA;Localised flooding of susceptible roads, low-lying areas and bridges. <span> Warning</span> </p>
+                                <!--<p> Large amounts of small hail over an open area.&#xD;&#xA;Localised flooding of susceptible roads, low-lying areas and bridges. </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warnings">
+                                <h3> Severe Thunderstorms <span> Ga-Segonyana / Kuruman</span> </h3>
+                                <span class="alertDura"> 10/11/2025 12:00:00 PM to 10/11/2025 6:59:59 PM </span>
+                                <p> Large amounts of small hail over an open area.&#xD;&#xA;Localised flooding of susceptible roads, low-lying areas and bridges. <span> Warning</span> </p>
+                                <!--<p> Large amounts of small hail over an open area.&#xD;&#xA;Localised flooding of susceptible roads, low-lying areas and bridges. </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warnings">
+                                <h3> Severe Thunderstorms <span> Greater Taung / Taung</span> </h3>
+                                <span class="alertDura"> 10/11/2025 12:00:00 PM to 10/11/2025 6:59:59 PM </span>
+                                <p> Large amounts of small hail over an open area.&#xD;&#xA;Localised flooding of susceptible roads, low-lying areas and bridges. <span> Warning</span> </p>
+                                <!--<p> Large amounts of small hail over an open area.&#xD;&#xA;Localised flooding of susceptible roads, low-lying areas and bridges. </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warnings">
+                                <h3> Severe Thunderstorms <span> Dikgatlong / Barkly West</span> </h3>
+                                <span class="alertDura"> 10/11/2025 12:00:00 PM to 10/11/2025 6:59:59 PM </span>
+                                <p> Large amounts of small hail over an open area.&#xD;&#xA;Localised flooding of susceptible roads, low-lying areas and bridges. <span> Warning</span> </p>
+                                <!--<p> Large amounts of small hail over an open area.&#xD;&#xA;Localised flooding of susceptible roads, low-lying areas and bridges. </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warnings">
+                                <h3> Severe Thunderstorms <span> Dawid Kruiper - Twee Rivieren / Twee Rivieren</span> </h3>
+                                <span class="alertDura"> 10/11/2025 12:00:00 PM to 10/11/2025 6:59:59 PM </span>
+                                <p> Large amounts of small hail over an open area.&#xD;&#xA;Localised flooding of susceptible roads, low-lying areas and bridges. <span> Warning</span> </p>
+                                <!--<p> Large amounts of small hail over an open area.&#xD;&#xA;Localised flooding of susceptible roads, low-lying areas and bridges. </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warnings">
+                                <h3> Severe Thunderstorms <span> Phokwane / Jan Kempdorp</span> </h3>
+                                <span class="alertDura"> 10/11/2025 12:00:00 PM to 10/11/2025 6:59:59 PM </span>
+                                <p> Large amounts of small hail over an open area.&#xD;&#xA;Localised flooding of susceptible roads, low-lying areas and bridges. <span> Warning</span> </p>
+                                <!--<p> Large amounts of small hail over an open area.&#xD;&#xA;Localised flooding of susceptible roads, low-lying areas and bridges. </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warnings">
+                                <h3> Severe Thunderstorms <span> Kagisano/Molopo / Tosca</span> </h3>
+                                <span class="alertDura"> 10/11/2025 12:00:00 PM to 10/11/2025 6:59:59 PM </span>
+                                <p> Large amounts of small hail over an open area.&#xD;&#xA;Localised flooding of susceptible roads, low-lying areas and bridges. <span> Warning</span> </p>
+                                <!--<p> Large amounts of small hail over an open area.&#xD;&#xA;Localised flooding of susceptible roads, low-lying areas and bridges. </p>-->
+                            </a>
+                            <a class="list-group-item" href="/home/warnings">
+                                <h3> Severe Thunderstorms <span> Mkhondo / Mkhondo/Piet Retief</span> </h3>
+                                <span class="alertDura"> 10/10/2025 6:33:10 PM to 10/10/2025 9:59:59 PM </span>
+                                <p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localized damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Large amounts of small
+                                    and/or large hail over an open area. <span> Warning</span> </p>
+                                <!--<p> Localized flooding of susceptible roads, low-lying areas and bridges.&#xD;&#xA;Localized damages to informal/formal houses or structures (roofs and carports) due to hail and strong winds.&#xD;&#xA;Large amounts of small and/or large hail over an open area. </p>-->
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <br />
+        <div class="row">
+
+            <div class="col-sm-7 mediaContent">
+
+
+                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+
+                    <ol class="carousel-indicators">
+                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#myCarousel" data-slide-to="1" class="active"></li>
+                    </ol>
+
+                    <!-- Wrapper for slides -->
+
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <a href="http://www.weathersa.co.za/marine/" target="_blank">
+                                        <img src="/images/Marine page.JPG" />
+                                    </a>
+
+                            <div class="carousel-caption visible-xs visible-lg visible-md visible-sm">
+                                <h3> Marine Website Successfully Launched </h3>
+                                <p> SAWS is proud to announce the launch of the new marine website. The highlights of the site include the recently operational, high-resolution Storm Surge and Wave Forecast models </p>
+                            </div>
+
+                        </div>
+                        <div class="item">
+                            <a href="Home/RadarSt" target="_blank">
+                                        <img src="/images/Storm Tracker page 4.jpg" />
+                                    </a>
+
+                            <div class="carousel-caption visible-xs visible-lg visible-md visible-sm">
+                                <h3> Our New Feature: Storm Tracker </h3>
+                                <p> </p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-5 general_warnings">
+                <ul class="nav nav-tabs nav-tab-Head warning-tabs">
+                    <li class="active">
+                        <a data-toggle="tab" href="#menu1">
+                            <h3 class="tab-heading-feeds"> <i class="fa fa-twitter"></i> Twitter Feeds</h3>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+                    <div id="menu1" class="tab-pane fade in active">
+                        <div class="col-md-12 twitterFeeds">
+                            <a class="twitter-timeline hidden" href="https://twitter.com/SAWeatherServic?ref_src=twsrc%5Etfw">Tweets by SAWeatherServic</a>
+                            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="content-heading">Our Focus Areas</h3>
+            </div>
+
+            <div class="col-md-12">
+                <div class="col-md-4">
+                    <div class="item">
+                        <div class="thumbnail our-work">
+                            <a href="/home/forecasting">
+                            <img src="/images/weather_pic-640x480.jpg" class="">
+                            <div class="caption text-center">
+                                <h4><span class="wi wi-time-4"></span> FORECASTING</h4>
+                            </div>
+                        </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="item">
+                        <div class="thumbnail our-work">
+                            <a href="/home/aboutclimateatsaws">
+                            <img src="/images/climate_pic-640x480.jpg">
+                            <div class="caption text-center">
+                                <h4><span class="wi wi-flood"></span> CLIMATE</h4>
+                            </div>
+                        </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="item">
+                        <div class="thumbnail our-work">
+                            <a href="http://aviation.weathersa.co.za/#home" target="_blank">
+                            <img src="/images/aviation_pic-640x480.jpg">
+                            <div class="caption  text-center">
+                                <h4><span class="wi wi-small-craft-advisory"></span> AVIATION</h4>
+                            </div>
+                        </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="col-md-4">
+                    <div class="item">
+                        <div class="thumbnail our-work">
+                            <a href="http://saaqis.environment.gov.za/" target="_blank">
+                            <img src="/images/Depositphotos_35050965_original.jpg" />
+                            <div class="caption  text-center">
+                                <h4><span class="wi wi-earthquake"></span> AIR QUALITY </h4>
+                            </div>
+                        </a>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="item">
+                        <div class="thumbnail our-work">
+                            <a href="http://marine.weathersa.co.za/" target="_blank">
+                            <img src="/images/ocean_back-640x480.jpg" alt="Lights" height="426">
+                            <div class="caption  text-center">
+                                <h4><span class="wi wi-earthquake"></span> MARINE </h4>
+                            </div>
+                        </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="item">
+                        <div class="thumbnail our-work">
+                            <a href="/home/research">
+                            <img src="/images/research_pic1.jpeg">
+                            <div class="caption  text-center">
+                                <h4><span class="wi wi-earthquake"></span> RESEARCH</h4>
+                            </div>
+                        </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+    </div>
+    <script src="/js/multi-carousel.js"></script>
+    <script src="/js/Temp-toggle.js"></script>
+    <script src="/js/CelsiusFahrenToggle.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            //if (localStorage.getItem('popState14') != 'shown') { //getItem or removeItem
+
+            //    $("#popup").delay(2000).fadeIn();
+
+            //    $('#confirmCookie').click(function (e) {
+            //        localStorage.setItem('popState14', 'shown');
+            //        $('#popup').fadeOut();
+            //    });
+
+            //}
+
+            //if (localStorage.getItem('popState17') != 'shown') { //getItem or removeItem
+
+            //    $("#popup").delay(2000).fadeIn();
+
+            //    $('#confirmCookie').click(function (e) {
+            //        localStorage.setItem('popState17', 'shown');
+            //        $('#popup').fadeOut();
+            //    });
+
+            //}
+
+            $('#confirmCookie').click(function() {
+                $('#popup').fadeOut();
+            });
+
+            $('#radarST').click(function() {
+                $('#radarSTDiv').fadeOut();
+            });
+
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            //if (localStorage.getItem('popState14') != 'shown') { //getItem or removeItem
+
+            //    $("#popup").delay(2000).fadeIn();
+
+            //    $('#confirmCookie').click(function (e) {
+            //        localStorage.setItem('popState14', 'shown');
+            //        $('#popup').fadeOut();
+            //    });
+
+            //}
+
+            //if (localStorage.getItem('popState17') != 'shown') { //getItem or removeItem
+
+            //    $("#popup").delay(2000).fadeIn();
+
+            //    $('#confirmCookie').click(function (e) {
+            //        localStorage.setItem('popState17', 'shown');
+            //        $('#popup').fadeOut();
+            //    });
+
+            //}
+
+            $('#confirmCookie').click(function() {
+                $('#popup').fadeOut();
+            });
+
+            $('#radarST').click(function() {
+                $('#radarSTDiv').fadeOut();
+            });
+
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            //if (localStorage.getItem('popState14') != 'shown') { //getItem or removeItem
+
+            //    $("#popup").delay(2000).fadeIn();
+
+            //    $('#confirmCookie').click(function (e) {
+            //        localStorage.setItem('popState14', 'shown');
+            //        $('#popup').fadeOut();
+            //    });
+
+            //}
+
+            //if (localStorage.getItem('popState17') != 'shown') { //getItem or removeItem
+
+            //    $("#popup").delay(2000).fadeIn();
+
+            //    $('#confirmCookie').click(function (e) {
+            //        localStorage.setItem('popState17', 'shown');
+            //        $('#popup').fadeOut();
+            //    });
+
+            //}
+
+            $('#confirmCookie').click(function() {
+                $('#popup').fadeOut();
+            });
+
+            $('#radarST').click(function() {
+                $('#radarSTDiv').fadeOut();
+            });
+
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            //if (localStorage.getItem('popState14') != 'shown') { //getItem or removeItem
+
+            //    $("#popup").delay(2000).fadeIn();
+
+            //    $('#confirmCookie').click(function (e) {
+            //        localStorage.setItem('popState14', 'shown');
+            //        $('#popup').fadeOut();
+            //    });
+
+            //}
+
+            //if (localStorage.getItem('popState17') != 'shown') { //getItem or removeItem
+
+            //    $("#popup").delay(2000).fadeIn();
+
+            //    $('#confirmCookie').click(function (e) {
+            //        localStorage.setItem('popState17', 'shown');
+            //        $('#popup').fadeOut();
+            //    });
+
+            //}
+
+            $('#confirmCookie').click(function() {
+                $('#popup').fadeOut();
+            });
+
+            $('#radarST').click(function() {
+                $('#radarSTDiv').fadeOut();
+            });
+
+        });
+    </script>
+
+
+    <script>
+        $(document).ready(function() {
+            $(".alert").css({
+                "display": "none"
+            });
+            //alert($('.alert').text());
+            if ($("#errAlert").text() == "City or Town not found") {
+                $('.alert').css({
+                    "display": "block"
+                });
+            }
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+
+            $(".searchFunc").css("display", "none");
+
+            $("#search").on("keyup", function() {
+
+                $(".searchFunc").css("display", "block");
+
+                if ($("#search").val() == 0) {
+                    $(".searchFunc").css("display", "none");
+                }
+
+                if ($("#myTable tr").text() == 0) {
+                    $(".searchFunc").css("display", "none");
+                }
+
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+
+                $("#myTable tr td").click(function() {
+                    var tableValue = $(this).text();
+                    $("#search:text").val(tableValue);
+                    $(".searchFunc").css("display", "none");
+                    $("#submitsearch").trigger("click");
+                });
+            });
+
+            $("#form1").validate({
+                errorLabelContainer: $("#form1 div.error")
+            });
+        });
+    </script>
+
+
+
+
+    <footer class="footer">
+        <div class="container">
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+                    <h4>ORGANISATION</h4>
+                    <ul class="list-unstyled">
+                        <li class="list-footer-item"><a href="/home/overview">Overview</a></li>
+                        <li class="list-footer-item"><a href="/home/bursaries">Bursaries</a></li>
+                        <li class="list-footer-item"><a href="/home/vacancies"> Careers </a></li>
+                        <li class="list-footer-item"><a href="https://rtc.weathersa.co.za" target="_blank"> Regional Training Center</a></li>
+                        <li class="list-footer-item"><a href="/home/contact">Contact Us</a></li>
+                        <li class="list-footer-item"><a href="https://www.weathersa.co.za/home/privacynotice">Privacy Notice</a></li>
+                        <!--<li><a href="https://go.microsoft.com/fwlink/?LinkId=699319">External Link</a></li>-->
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h4>PRODUCTS &amp; SERVICES</h4>
+                    <ul class="list-unstyled">
+                        <!--<li class="list-footer-item"><a asp-area="" asp-controller="Home" asp-action="Subscribe">WeatherSmart Products</a></li>-->
+                        <li class="list-footer-item"><a href="https://developers.afrigis.co.za/portfolio/weather-api/" target="_blank">WeatherSmart API</a></li>
+                    </ul>
+                    <h4>CONTACT US</h4>
+                    <ul class="list-unstyled">
+                        <li class="list-footer-item">Climate Data Request: <a href="mailto:info4@weathersa.co.za" target="_top"><strong> info4@weathersa.co.za </strong> </a></li>
+                        <li class="list-footer-item">Complaints and Compliments: <a href="mailto:complaints@weathersa.co.za" target="_top"> <strong>complaints@weathersa.co.za </strong></a></li>
+                        <li class="list-footer-item">Partners and Clients: <a href="mailto:partnersupport@weathersa.co.za" target="_top"> <strong>partnersupport@weathersa.co.za</strong></a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h4>HEAD OFFICE</h4>
+                    <ul class="list-unstyled">
+                        <li class="list-footer-item"><i class="fa fa-home"></i><a> No. 1263 Heuwel Road, </a></li>
+                        <li class="list-footer-item"><a> Centurion Central (ABSA Building),</a></li>
+                        <li class="list-footer-item"><a> Centurion, 0157</a></li>
+                        <li class="list-footer-item"><a> Private Bag X097</a></li>
+                        <li class="list-footer-item"><a> Pretoria 0001</a></li>
+                        <li class="list-footer-item"><i class="fa fa-phone"></i><a href="tel:+27 12 367 6000"> +27 12 367 6000</a></li>
+                        <li class="list-footer-item"><i class="fa fa-fax"></i><a href="tel:+27 12 367 6000"> +27 12 367 6000</a></li>
+                        <li class="list-footer-item"><i class="fa fa-envelope"></i>Email for Head Office: <a href="mailto:generalenquiries@weathersa.co.za" target="_top"> generalenquiries@weathersa.co.za  </a></li>
+
+                    </ul>
+                </div>
+                <div class="col-md-3 ">
+                    <h4>QUICK LINKS</h4>
+                    <ul class="list-unstyled">
+                        <li class="list-footer-item">
+                            </i><a href="/home/provincialdemarcation"> Provincial Demarcations </a></li>
+                        <li class="list-footer-item"><a href="#"> Automatic Rain Station Portal</a></li>
+                        <li class="list-footer-item"><a href="http://aviation.weathersa.co.za/" target="_blank">Aviation</a></li>
+                        <li class="list-footer-item"><a href="https://rsmc.weathersa.co.za/" target="_blank">RSMC</a></li>
+                        <li class="list-footer-item"><a href="http://saaqis.environment.gov.za/" target="_blank">SAAQIS</a></li>
+                        <li class="list-footer-item"><a href="http://www.wmo.int/pages/index_fr.html" target="_blank">WMO</a></li>
+                        <li class="list-footer-item"><a href="#">GISC Pretoria</a></li>
+                        <li class="list-footer-item"><a href="http://www.wmo.int/youth/" target="_blank">WMO for Youth</a></li>
+
+
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="col-md-12 copyRight">
+            <h6> &copy; 2025 | South African Weather Service. All Rights Reserved.</h6>
+        </div>
+    </footer>
+
+
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="/js/site.js"></script>
+    <script src="/lib/leaflet/dist/leaflet.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false&key=AIzaSyDg4kddVaGQNI5O5Cx5eOpGBO0X8ODTL-U"></script>
+    <script src="/js/loading.js"></script>
+
+
+
+
+    <script>
+        $(function() {
+            $('body').removeClass('fade-out');
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            //sessionStorage.setItem("MyId", 123);
+            //alert(sessionStorage.getItem("MyId"));
+            //var url = new URL(url_string);
+            //var c = url.searchParams.get("clientid");
+            var currentLocation = window.location;
+            var url = new URL(currentLocation);
+            var c = url.searchParams.get("clientid");
+            //alert(c);
+            //alert(sessionStorage.getItem(c));
+            //$("#sessionID").css({ "display": "none" });
+            //alert($('.alert').text());
+            //if (c == "1") {
+            //    alert("Yes");
+            //} else {
+            //    alert("No");
+            //}
+            if (c == "1") {
+                //document.getElementById("result").innerHTML = sessionStorage.getItem("lastname");
+                $('#sessionID').css({
+                    "display": "block"
+                });
+                $('#login').css({
+                    "display": "none"
+                });
+                $('#logout').css({
+                    "display": "block"
+                });
+            } else {
+                $('#sessionID').css({
+                    "display": "none"
+                });
+                $('#login').css({
+                    "display": "block"
+                });
+                $('#logout').css({
+                    "display": "none"
+                });
+            }
+        });
+    </script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-UA-121870489-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-121870489-1');
+    </script>
+
+    <script>
+        $('.dropdown-menu a.dropdown-toggle').on('click', function(e) {
+            if (!$(this).next().hasClass('show')) {
+                $(this).parents('.dropdown-menu').first().find('.show').removeClass("show");
+            }
+            var $subMenu = $(this).next(".dropdown-menu");
+            $subMenu.toggleClass('show');
+
+
+            $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function(e) {
+                $('.dropdown-submenu .show').removeClass("show");
+            });
+
+
+            return false;
+        });
+    </script>
+
+
+</body>
+
+</html>
